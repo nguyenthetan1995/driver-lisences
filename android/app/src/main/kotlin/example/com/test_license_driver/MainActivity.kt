@@ -1,4 +1,4 @@
-package example.com.hoclaixe
+package example.com.test_license_driver
 
 import android.os.Bundle
 

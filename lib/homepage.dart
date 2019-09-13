@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hoclaixe/db.dart';
-import 'package:hoclaixe/listexam.dart';
+import 'package:test_license_driver/learnpage.dart';
+import 'package:test_license_driver/processdatabase.dart';
+import 'package:test_license_driver/signpage.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -11,61 +12,79 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Ôn thi GPLX B2',
-          ),
+      appBar: AppBar(
+        title: Text(
+          'Ôn thi GPLX B2',
         ),
-        body: Column(
-          children: <Widget>[
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("images/365.png"), fit: BoxFit.fill)),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-//                                initializeDatabase();
-                        return ListExamPage();
-                      }));
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: 200,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/imageapp/438.webp"),
+                    fit: BoxFit.fill)),
+          ),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       initializeDatabase();
-                      print('123');
-                    },
-                    child: optionObject(OptionObject(
-                        iconOption: Icon(
-                          Icons.border_color,
-                          size: 40,
-                          color: Colors.lightBlue,
-                        ),
-                        textDescription: "Thi sát hạch")),
-                  ),
-                  optionObject(OptionObject(
+                      return LearningPage();
+                    }));
+                  },
+                  child: optionObject(OptionObject(
                       iconOption: Icon(
                         Icons.book,
                         size: 40,
                         color: Colors.lightBlue,
                       ),
                       textDescription: "Học lý thuyết")),
-                  optionObject(OptionObject(
+                ),
+                GestureDetector(
+                  onTap: () {
+//                    Navigator.push(context,
+//                        MaterialPageRoute(builder: (context) {
+//                          return ListExamPage();
+//                        }));
+//                    initializeDatabase();
+                  },
+                  child: optionObject(OptionObject(
+                      iconOption: Icon(
+                        Icons.border_color,
+                        size: 40,
+                        color: Colors.lightBlue,
+                      ),
+                      textDescription: "Thi sát hạch")),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      initializeDatabase();
+                      return SignPage();
+                    }));
+                  },
+                  child: optionObject(OptionObject(
                       iconOption: Icon(
                         Icons.directions_bike,
                         size: 40,
                         color: Colors.lightBlue,
                       ),
                       textDescription: "Biển báo giao thông")),
-                ],
-              ),
-            )
-          ],
-        ));
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 
