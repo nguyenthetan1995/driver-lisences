@@ -3,6 +3,8 @@ import 'package:test_license_driver/learnpage.dart';
 import 'package:test_license_driver/processdatabase.dart';
 import 'package:test_license_driver/signpage.dart';
 
+import 'listexam.dart';
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -49,11 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 GestureDetector(
                   onTap: () {
-//                    Navigator.push(context,
-//                        MaterialPageRoute(builder: (context) {
-//                          return ListExamPage();
-//                        }));
-//                    initializeDatabase();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return ListExamPage();
+                        }));
+                    initializeDatabase();
                   },
                   child: optionObject(OptionObject(
                       iconOption: Icon(
