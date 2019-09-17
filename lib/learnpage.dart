@@ -47,41 +47,44 @@ Widget questionType(QuestionTypeModel question, BuildContext context) {
     },
     child: Card(
       elevation: 3,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(5),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage("assets/icon/${question.zImage}"),
-            )),
-          ),
-          Flexible(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    question.zTypeQuestion,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    question.zTypeQuestionDesc,
-                    style: TextStyle(fontSize: 16),
-                  )
-                ],
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(50),
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage("assets/icon/${question.zImage}"),
+              )),
+            ),
+            Flexible(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      question.zTypeQuestion,
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      question.zTypeQuestionDesc,
+                      style: TextStyle(fontSize: 16),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
