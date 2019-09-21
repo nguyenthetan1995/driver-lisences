@@ -23,7 +23,21 @@ class QuestionModel{
     this.zImageQuestion,
     this.zAnswer,
     this.zAnswerDesc,
-});
+}
+);
+  Map<String,dynamic> toJson(){
+    var result=  Map<String,dynamic>() ;
+    result["ZQUESTIONCONTENT"]=this.zQuestion;
+    result["ZOPTION1"]=this.zOption1;
+    result["ZOPTION2"]=this.zOption2;
+    result["ZOPTION3"]=this.zOption3;
+    result["ZOPTION4"]=this.zOption4;
+    result["ZIMAGE"]=this.zImageQuestion;
+    result["ZANSWERS"]=this.zAnswer;
+    result["ZANSWERDESC"]=this.zAnswerDesc;
+    return result;
+
+  }
   factory QuestionModel.fromJson(Map<String, dynamic> json){
     return QuestionModel(
       zQuestion: json["ZQUESTIONCONTENT"],
@@ -36,4 +50,5 @@ class QuestionModel{
       zAnswerDesc: json["ZANSWERDESC"],
     );
   }
+
 }

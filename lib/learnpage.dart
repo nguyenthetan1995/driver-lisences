@@ -26,6 +26,9 @@ class _LearningPageState extends State<LearningPage> {
   }
 
   Widget build(BuildContext context) {
+    if (question == null)
+      return Container();
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Học lý thuyết'),

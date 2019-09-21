@@ -8,7 +8,7 @@ import 'model/SignModel.dart';
 
 Future<Database> initializeDatabase() async {
   var path = await getDatabasesPath();
-  var dbPath = (path + '/' + 'data30.sqlite');
+  var dbPath = (path + '/' + 'data31.sqlite');
 
   if (FileSystemEntity.typeSync(dbPath) == FileSystemEntityType.notFound) {
     ByteData data = await rootBundle.load("assets/databases/data.sqlite");
@@ -47,7 +47,6 @@ Future<List<SignModel>> getListSign(
   for (var sign in signs) {
     listSign.add(SignModel.fromJson(sign));
   }
-  print(listSign.length);
   return (listSign);
 }
 
@@ -68,6 +67,17 @@ Future<List<QuestionModel>> getListQuestion(
   var listQuestion = new List<QuestionModel>();
   List questions = await departuresDatabase
       .rawQuery("SELECT * FROM ZQUESTION WHERE ZQUESTIONTYPE = $typeQuestion");
+  for (var question in questions) {
+    listQuestion.add(QuestionModel.fromJson(question));
+  }
+  return (listQuestion);
+}
+
+Future<List<QuestionModel>> getAllListQuestion(
+    Database departuresDatabase) async {
+  var listQuestion = new List<QuestionModel>();
+  List questions = await departuresDatabase
+      .rawQuery("SELECT * FROM ZQUESTION");
   for (var question in questions) {
     listQuestion.add(QuestionModel.fromJson(question));
   }

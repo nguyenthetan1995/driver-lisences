@@ -35,9 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
+                    initializeDatabase();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      initializeDatabase();
                       return LearningPage();
                     }));
                   },
@@ -51,11 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    initializeDatabase();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                           return ListExamPage();
                         }));
-                    initializeDatabase();
                   },
                   child: optionObject(OptionObject(
                       iconOption: Icon(
@@ -67,9 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    initializeDatabase();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      initializeDatabase();
                       return SignPage();
                     }));
                   },

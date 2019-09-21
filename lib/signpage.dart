@@ -10,8 +10,8 @@ class SignPage extends StatefulWidget {
 
 class _SignPageState extends State<SignPage> {
   SignModel sign;
-  List<SignModel> listSign;
-  List<SignTypeModel> listModelSignType;
+  List<SignModel> listSign = [];
+  List<SignTypeModel> listModelSignType = [];
   List listSignType = [];
   List<Widget> tabs = [];
   List<Widget> bodyTabs = new List();
@@ -36,10 +36,23 @@ class _SignPageState extends State<SignPage> {
   }
 
   Widget build(BuildContext context) {
-    tabs.clear();
+
+    if (listSign.length == 0)
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.white,
+            valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+          ),
+        ),
+      );
+
+    if (listSign.length != 0){
+      tabs.clear();
     for (var i in listSignType) {
       tabs.add(tabBar(i));
-    }
+    }}
+
     return DefaultTabController(
       length: listSignType.length,
       child: Scaffold(
@@ -61,9 +74,9 @@ class _SignPageState extends State<SignPage> {
     );
   }
 
-  Widget tabBar(String signtype) {
+  Widget tabBar(String signType) {
     return Text(
-      signtype,
+      signType,
       style: TextStyle(fontSize: 16),
     );
   }
@@ -87,7 +100,7 @@ class _SignPageState extends State<SignPage> {
             width: 100,
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage("assets/imageapp/${sign.zImageSign}"),
+              image: AssetImage("assets/imageapp/${sign.zImageSign}"),fit: BoxFit.contain
             )),
           ),
           Flexible(

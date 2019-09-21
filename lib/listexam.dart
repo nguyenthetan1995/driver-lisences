@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_license_driver/processdatabase.dart';
 import 'exampage.dart';
 
 class ListExamPage extends StatefulWidget {
@@ -18,8 +19,8 @@ class _ListExamPageState extends State<ListExamPage> {
         ),
         body: GestureDetector(
           onTap: () {
+            initializeDatabase();
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                                initializeDatabase();
               return ExamPage();
             }));
             print('123');
