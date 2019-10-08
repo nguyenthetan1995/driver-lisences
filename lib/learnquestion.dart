@@ -70,7 +70,6 @@ List<Widget> buildListView(List<QuestionModel> list) {
 
 Widget question(QuestionModel question) {
   List<String> answers = (question.zAnswer.split(','));
-  print(answers);
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: ListView(

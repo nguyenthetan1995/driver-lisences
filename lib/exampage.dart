@@ -1,14 +1,18 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:test_license_driver/model/TestModel.dart';
 import 'package:test_license_driver/processdatabase.dart';
+import 'package:test_license_driver/time.dart';
 import 'model/QuestionModel.dart';
 
 class ExamPage extends StatefulWidget {
+  ExamPage({this.testModel});
+  TestModel testModel;
   @override
   _ExamPageState createState() => _ExamPageState();
 }
 
-class _ExamPageState extends State<ExamPage> {
+class _ExamPageState extends State<ExamPage>  with SingleTickerProviderStateMixin  {
   List<QuestionModel> listModelQuestion = [];
   List<QuestionModel> listModelQuestion431 = [];
   List<QuestionModel> listModelQuestion432 = [];
@@ -18,33 +22,66 @@ class _ExamPageState extends State<ExamPage> {
   List<QuestionModel> listModelQuestion4647 = [];
   List<QuestionModel> listModelQuestion48 = [];
   List<QuestionModel> listModelQuestion49 = [];
-  List<QuestionModel> listQuestionExam = List<QuestionModel>();
+  List<QuestionModel> listQuestionExam = [];
   QuestionModel question;
-
-  @override
-  void initState() {
-    super.initState();
-    initializeDatabase().then((v) async {
-      this.listModelQuestion = await getAllListQuestion(v);
-      setState(() {});
-    });
-  }
-
   List<Widget> lstTabs = [];
   List<Widget> lstQues = [];
+  TabController _controller;
+  @override
+  void initState() {
 
+    super.initState();
+    listQuestionExam =  widget.testModel.Questions;
+    print(listQuestionExam.length);
+    _controller = TabController(vsync: this, length: listQuestionExam.length);
+    for (var i = 0; i < listQuestionExam.length; i++) {
+      lstTabs.add(Tab(
+        child: Text(
+          'Câu ${i + 1}',
+          style: TextStyle(fontSize: 18),
+        ),
+      ));
+      lstQues = (buildListView(listQuestionExam,_controller));
+      for (QuestionModel question in listQuestionExam) {
+        //this.question = question;
+      }
+    }
+    print(lstTabs.length);
+    print(lstQues.length);
+
+
+    _controller.addListener(_handleTabSelection);
+//    initializeDatabase().then((v) async {
+//      this.listModelQuestion = await getAllListQuestion(v);
+//      setState(() {});
+//    });
+  }
+
+
+
+  int _currentIndex=0;
+  void _handleTabSelection()
+  {
+    setState(() {
+      _currentIndex = _controller.index;
+    });
+    print("_controller index change");
+    print(_controller.index);
+    // to save index-1
+  }
   @override
   Widget build(BuildContext context) {
-    listQuestionExam.clear();
+    /*listQuestionExam.clear();
     listModelQuestion431.clear();
     listModelQuestion432.clear();
     listModelQuestion44.clear();
     listModelQuestion45.clear();
     listModelQuestion4647.clear();
     listModelQuestion48.clear();
-    listModelQuestion49.clear();
-    if (listModelQuestion.length == 0)
+    listModelQuestion49.clear();*/
+    /*if (listModelQuestion.length == 0)
       return Container(
+        color: Colors.white,
         child: Center(
           child: CircularProgressIndicator(
             valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
@@ -122,12 +159,12 @@ class _ExamPageState extends State<ExamPage> {
             style: TextStyle(fontSize: 18),
           ),
         ));
-        lstQues = (buildListView(listQuestionExam));
+        lstQues = (buildListView(listQuestionExam,_controller));
         for (QuestionModel question in listQuestionExam) {
           this.question = question;
         }
       }
-    }
+    }*/
 
 /*    print('listQuestionExam.length: ' + listQuestionExam.length.toString());
     var value=jsonEncode(listQuestionExam.map((f)=>f.toJson()).toList());
@@ -139,12 +176,28 @@ class _ExamPageState extends State<ExamPage> {
       length: lstTabs.length,
       child: Scaffold(
           appBar: AppBar(
-            title: Text(
-              'Đề số 1',
-              style: TextStyle(fontSize: 20.0),
+            title: Container(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Đề số 1',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      CountDownTime(),
+                      Text('ád'),
+                    ],
+                  )
+                ],
+              ),
             ),
             bottom: PreferredSize(
                 child: TabBar(
+                  controller: _controller,
                   isScrollable: true,
                   unselectedLabelColor: Colors.white.withOpacity(0.5),
                   indicatorColor: Colors.white,
@@ -152,12 +205,12 @@ class _ExamPageState extends State<ExamPage> {
                 ),
                 preferredSize: Size.fromHeight(40.0)),
           ),
-          body: TabBarView(children: lstQues)),
+          body: TabBarView(children: lstQues,controller: _controller,)),
     );
   }
 }
 
-List<Widget> buildListView(List<QuestionModel> list) {
+List<Widget> buildListView(List<QuestionModel> list,TabController controller) {
   return list.map((f) => CheckQuestion(f)).toList();
 }
 
@@ -183,7 +236,11 @@ class _CheckQuestionState extends State<CheckQuestion> {
       }
     });
   }
-
+  @override
+  void dispose() {
+    print("dispose:");
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(

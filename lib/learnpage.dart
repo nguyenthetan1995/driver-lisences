@@ -43,7 +43,6 @@ class _LearningPageState extends State<LearningPage> {
 Widget questionType(QuestionTypeModel question, BuildContext context) {
   return GestureDetector(
     onTap: () {
-      initializeDatabase();
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return Questions(question);
       }));

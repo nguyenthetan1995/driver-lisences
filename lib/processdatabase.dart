@@ -8,7 +8,7 @@ import 'model/SignModel.dart';
 
 Future<Database> initializeDatabase() async {
   var path = await getDatabasesPath();
-  var dbPath = (path + '/' + 'data31.sqlite');
+  var dbPath = (path + '/' + 'data70.sqlite');
 
   if (FileSystemEntity.typeSync(dbPath) == FileSystemEntityType.notFound) {
     ByteData data = await rootBundle.load("assets/databases/data.sqlite");
@@ -58,7 +58,6 @@ Future<List<QuestionTypeModel>> getListQuestionType(
   for (var questionType in questionTypes) {
     listQuestionType.add(QuestionTypeModel.fromJson(questionType));
   }
-  print(questionTypes);
   return (listQuestionType);
 }
 

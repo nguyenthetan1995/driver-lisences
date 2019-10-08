@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:test_license_driver/exams.dart';
 import 'package:test_license_driver/learnpage.dart';
-import 'package:test_license_driver/processdatabase.dart';
 import 'package:test_license_driver/signpage.dart';
-
-import 'listexam.dart';
+import 'package:test_license_driver/time.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -11,80 +10,102 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Widget> options = [];
+  Color colorOption = Colors.lightBlue;
+  double sizeOption = 40;
   @override
   Widget build(BuildContext context) {
+    options.clear();
+    options.add(
+      GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return LearningPage();
+          }));
+        },
+        child: optionObject(OptionObject(
+            iconOption:  Icons.book ,size: sizeOption,color: colorOption,
+            textDescription: "Học lý thuyết")),
+      ),
+    );
+    options.add(
+      GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return ListExamPage1();
+          }));
+        },
+        child: optionObject(OptionObject(
+            iconOption:  Icons.border_color ,size: sizeOption,color: colorOption,
+            textDescription: "Thi theo bộ đề")),
+      ),
+    );
+    options.add(
+      GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SignPage();
+          }));
+        },
+        child: optionObject(OptionObject(
+            iconOption:  Icons.remove_circle ,size: sizeOption,color: colorOption,
+            textDescription: "Biển báo giao thông")),
+      ),
+    );
+    options.add(
+      GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return CountDownTime();
+          }));
+        },
+        child: optionObject(OptionObject(
+          iconOption:  Icons.shuffle ,size: sizeOption,color: colorOption,
+            textDescription: "Đề thi ngẫu nhiên")),
+      ),
+    );
+    options.add(
+      GestureDetector(
+/*        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SignPage();
+          }));
+        },*/
+        child: optionObject(OptionObject(
+            iconOption:  Icons.priority_high ,size: sizeOption,color: colorOption,
+            textDescription: "Mẹo thi kết quả cao")),
+      ),
+    );
+    options.add(
+      GestureDetector(
+/*        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SignPage();
+          }));
+        },*/
+        child: optionObject(OptionObject(
+            iconOption:  Icons.search ,size: sizeOption,color: Colors.blue,
+            textDescription: "Tra cứu luật nhanh")),
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Ôn thi GPLX B2',
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/imageapp/438.webp"),
-                    fit: BoxFit.fill)),
-          ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    initializeDatabase();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return LearningPage();
-                    }));
-                  },
-                  child: optionObject(OptionObject(
-                      iconOption: Icon(
-                        Icons.book,
-                        size: 40,
-                        color: Colors.lightBlue,
-                      ),
-                      textDescription: "Học lý thuyết")),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    initializeDatabase();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return ListExamPage();
-                        }));
-                  },
-                  child: optionObject(OptionObject(
-                      iconOption: Icon(
-                        Icons.border_color,
-                        size: 40,
-                        color: Colors.lightBlue,
-                      ),
-                      textDescription: "Thi sát hạch")),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    initializeDatabase();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return SignPage();
-                    }));
-                  },
-                  child: optionObject(OptionObject(
-                      iconOption: Icon(
-                        Icons.directions_bike,
-                        size: 40,
-                        color: Colors.lightBlue,
-                      ),
-                      textDescription: "Biển báo giao thông")),
-                ),
-              ],
-            ),
-          )
-        ],
+      body: Container(
+//        decoration: BoxDecoration(
+//            image: DecorationImage(
+//                image: AssetImage("assets/imageapp/438.webp"),
+//                fit: BoxFit.fill)),
+        child: GridView.count(
+            crossAxisCount: 3,
+            childAspectRatio: 1.0,
+            padding: const EdgeInsets.all(4.0),
+            mainAxisSpacing: 10.0,
+            crossAxisSpacing: 10.0,
+            children: options),
       ),
     );
   }
@@ -94,16 +115,17 @@ class OptionObject {
   OptionObject({
     this.iconOption,
     this.textDescription,
+    this.color,this.size
   });
-  Icon iconOption;
+  IconData iconOption;
   String textDescription;
+  Color color;
+  double size;
 }
 
 Widget optionObject(OptionObject option) {
   return Container(
-    padding: EdgeInsets.all(5),
-    height: 110,
-    width: 125,
+    padding: EdgeInsets.all(10),
     decoration: BoxDecoration(
         border: Border.all(color: Colors.lightBlue, width: 2),
         borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -112,13 +134,16 @@ Widget optionObject(OptionObject option) {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
-          height: 40,
+          height: 50,
+//          color: Colors.orange,
           child: Center(
-            child: option.iconOption,
+            child: new Icon(option.iconOption,color: option.color,size: option.size,),
+//            child: option.iconOption
           ),
         ),
         Container(
           height: 50,
+//          color: Colors.green,
           child: Center(
             child: Text(
               option.textDescription,
@@ -126,7 +151,7 @@ Widget optionObject(OptionObject option) {
               textAlign: TextAlign.center,
             ),
           ),
-        )
+        ),
       ],
     ),
   );

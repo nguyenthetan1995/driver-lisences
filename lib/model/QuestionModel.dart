@@ -14,6 +14,7 @@ class QuestionModel{
   String zImageQuestion;
   String zAnswer;
   String zAnswerDesc;
+  List<int> UserChoses;
   QuestionModel({
     this.zQuestion,
     this.zOption1,
@@ -23,6 +24,7 @@ class QuestionModel{
     this.zImageQuestion,
     this.zAnswer,
     this.zAnswerDesc,
+    this.UserChoses,
 }
 );
   Map<String,dynamic> toJson(){
@@ -35,6 +37,7 @@ class QuestionModel{
     result["ZIMAGE"]=this.zImageQuestion;
     result["ZANSWERS"]=this.zAnswer;
     result["ZANSWERDESC"]=this.zAnswerDesc;
+    result["UserChoses"]=this.UserChoses;
     return result;
 
   }
@@ -48,6 +51,7 @@ class QuestionModel{
       zImageQuestion: json["ZIMAGE"],
       zAnswer: json["ZANSWERS"],
       zAnswerDesc: json["ZANSWERDESC"],
+      UserChoses: json["UserChoses"],
     );
   }
 
