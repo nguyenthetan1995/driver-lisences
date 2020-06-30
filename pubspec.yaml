@@ -49,6 +49,7 @@ flutter:
   - assets/imageapp/
   - assets/databases/data.sqlite
   - assets/icon/
+  - assets/imghome/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -11,6 +11,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> options = [];
+  final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
   Color colorOption = Colors.lightBlue;
   double sizeOption = 40;
   @override
@@ -94,19 +95,58 @@ class _MyHomePageState extends State<MyHomePage> {
           'Ôn thi GPLX B2',
         ),
       ),
-      body: Container(
-//        decoration: BoxDecoration(
-//            image: DecorationImage(
-//                image: AssetImage("assets/imageapp/438.webp"),
-//                fit: BoxFit.fill)),
-        child: GridView.count(
-            crossAxisCount: 3,
-            childAspectRatio: 1.0,
-            padding: const EdgeInsets.all(4.0),
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            children: options),
-      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+
+        children: <Widget>[
+          Container(
+            height: 120.0,
+            child: new ListView(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              children: <Widget>[
+                new Container(
+                  width:  MediaQuery.of(context).size.width,
+                  height: 120.0,
+                  color: Colors.red,
+                  child: new Center(
+                    child:Image(image: AssetImage( '568.webp'))
+                  ),
+                ),
+                new Container(
+                    width:  MediaQuery.of(context).size.width,
+                    height:120.0,
+                    color: Colors.blue,
+                    child: new Center(
+                      child: Image(image: AssetImage( '569.webp'))
+                    )
+                )
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10.0,right: 10.0),
+            height: (MediaQuery.of(context).size.height/2),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: GridView.count(
+                      crossAxisCount: 3,
+                      childAspectRatio: 1.0,
+                      padding: const EdgeInsets.all(4.0),
+                      mainAxisSpacing: 10.0,
+                      crossAxisSpacing: 10.0,
+                      children: options
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        ],
+      )
     );
   }
 }
