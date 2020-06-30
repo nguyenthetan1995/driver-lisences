@@ -3,6 +3,7 @@ import 'package:test_license_driver/exams.dart';
 import 'package:test_license_driver/learnpage.dart';
 import 'package:test_license_driver/signpage.dart';
 import 'package:test_license_driver/time.dart';
+import 'package:image_auto_slider/image_auto_slider.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> options = [];
-  final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
+  final List<int> numbers = [1, 2];
   Color colorOption = Colors.lightBlue;
   double sizeOption = 40;
   @override
@@ -106,21 +107,22 @@ class _MyHomePageState extends State<MyHomePage> {
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               children: <Widget>[
-                new Container(
-                  width:  MediaQuery.of(context).size.width,
-                  height: 120.0,
-                  color: Colors.red,
-                  child: new Center(
-                    child:Image(image: AssetImage( '568.webp'))
-                  ),
-                ),
+
                 new Container(
                     width:  MediaQuery.of(context).size.width,
                     height:120.0,
                     color: Colors.blue,
-                    child: new Center(
-                      child: Image(image: AssetImage( '569.webp'))
-                    )
+                    child: ImageAutoSlider(
+                      assetImages: [
+                        AssetImage('assets/img1.png'),
+                        AssetImage('assets/img2.jpg'),
+                        AssetImage('assets/img3.jpeg')
+                      ],
+                      imageHeight: 120.0,
+                      boxFit: BoxFit.fitWidth,
+                      slideMilliseconds: 700,
+                      durationSecond: 3,
+                    ),
                 )
               ],
             ),
