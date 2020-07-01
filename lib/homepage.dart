@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test_license_driver/exams.dart';
 import 'package:test_license_driver/learnpage.dart';
@@ -5,104 +6,395 @@ import 'package:test_license_driver/signpage.dart';
 import 'package:test_license_driver/time.dart';
 import 'package:image_auto_slider/image_auto_slider.dart';
 
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+GlobalKey slidekey = GlobalKey();
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> options = [];
-  final List<int> numbers = [1, 2];
+  Drawer _drawerbuild(context){
+    return new Drawer(
+        child:new ListView(
+          children: <Widget>[
+            new DrawerHeader(
+              child: new Container(
+                child: new Column(
+                  children: <Widget>[
+                    new Text('Nguyen The Tan',style: TextStyle(color: Colors.white),)
+                  ],
+                ),
+              ),
+              decoration: new BoxDecoration(
+                  color: Colors.blue
+              ),
+            ),
+            new Container(
+              color: Colors.lightBlue,
+              child: new ListTile(
+                leading: new Icon(Icons.home, color: Colors.white),
+                title: new Text('Trang chủ', style: TextStyle(color: Colors.white)),
+                onTap: (){
+                  setState(() {
+
+                  });
+                },
+              ),
+            ),
+
+            new ListTile(
+              leading: new Icon(Icons.help),
+              title: new Text('Hướng dẫn sử dụng'),
+              onTap: (){
+                setState(() {
+
+                });
+              },
+            ),
+            new ListTile(
+              leading: new Icon(Icons.phone),
+              title: new Text('Hỗ trợ'),
+              onTap: (){
+                setState(() {
+
+                });
+              },
+            ),
+            new Divider(
+              indent: 16.0,
+              color: Colors.grey,
+            ), new ListTile(
+              leading: new Icon(Icons.settings),
+              title: new Text('Cài đặt'),
+            ),
+            new ListTile(
+              leading: new Icon(Icons.thumb_up),
+              title: new Text('Đánh giá'),
+            ),
+            new ListTile(
+              leading: new Icon(Icons.share),
+              title: new Text('Chia sẻ'),
+            ),
+            new ListTile(
+              leading: new Icon(Icons.people),
+              title: new Text('Chính sách điều khoản'),
+            ),
+          ],
+        )
+    );
+  }
   Color colorOption = Colors.lightBlue;
-  double sizeOption = 40;
+  double sizeOption = 10;
   @override
   Widget build(BuildContext context) {
     options.clear();
     options.add(
-      GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return LearningPage();
-          }));
-        },
-        child: optionObject(OptionObject(
-            iconOption:  Icons.book ,size: sizeOption,color: colorOption,
-            textDescription: "Học lý thuyết")),
-      ),
-    );
+        Stack(
+        alignment: new Alignment(0.0, 0.9),
+        children: <Widget>[
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return LearningPage();
+              }));
+            },
+            child: new Container(
+              width: 150.0,
+              height: 150.0,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54.withOpacity(0.4),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+                child: new Container(
+                    padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
+                    child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                )
+            ),
+          ),
+          //Container(height: 30,color: Colors.blue,),
+
+          new Container(
+            padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 7.0),
+            decoration: new BoxDecoration(
+
+            ),
+            child: new Text('Học lý thuyết', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+          )
+
+        ]
+    ));
     options.add(
-      GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return ListExamPage1();
-          }));
-        },
-        child: optionObject(OptionObject(
-            iconOption:  Icons.border_color ,size: sizeOption,color: colorOption,
-            textDescription: "Thi theo bộ đề")),
-      ),
-    );
+        Stack(
+            alignment: new Alignment(0.0, 0.9),
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ListExamPage1();
+                  }));
+                },
+                child: new Container(
+                  width: 150.0,
+                  height: 150.0,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black54.withOpacity(0.4),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                    child: new Container(
+                        padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
+                        child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                    )
+                ),
+              ),
+              //Container(height: 30,color: Colors.blue,),
+
+              new Container(
+                padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 7.0),
+                decoration: new BoxDecoration(
+
+                ),
+                child: new Text('Thi theo bộ đề', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              )
+
+            ]
+    ));
+
     options.add(
-      GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return SignPage();
-          }));
-        },
-        child: optionObject(OptionObject(
-            iconOption:  Icons.remove_circle ,size: sizeOption,color: colorOption,
-            textDescription: "Biển báo giao thông")),
-      ),
-    );
+        Stack(
+            alignment: new Alignment(0.0, 0.9),
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SignPage();
+                  }));
+                },
+                child: new Container(
+                  width: 150.0,
+                  height: 150.0,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black54.withOpacity(0.4),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                    child: new Container(
+                        padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
+                        child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                    )
+                ),
+              ),
+              //Container(height: 30,color: Colors.blue,),
+
+              new Container(
+                padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 3.0),
+                decoration: new BoxDecoration(
+
+                ),
+                child: new Text('Biển báo giao thông', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              )
+
+            ]
+    ));
     options.add(
-      GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return CountDownTime();
-          }));
-        },
-        child: optionObject(OptionObject(
-          iconOption:  Icons.shuffle ,size: sizeOption,color: colorOption,
-            textDescription: "Đề thi ngẫu nhiên")),
-      ),
-    );
+        Stack(
+            alignment: new Alignment(0.0, 0.9),
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CountDownTime();
+                  }));
+                },
+                child: new Container(
+                  width: 150.0,
+                  height: 150.0,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black54.withOpacity(0.4),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                    child: new Container(
+                        padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
+                        child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                    )
+                ),
+              ),
+              //Container(height: 30,color: Colors.blue,),
+
+              new Container(
+                padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 3.0),
+                decoration: new BoxDecoration(
+
+                ),
+                child: new Text('Đề thi ngẫu nhiên', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              )
+
+            ]
+    ));
     options.add(
-      GestureDetector(
-/*        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return SignPage();
-          }));
-        },*/
-        child: optionObject(OptionObject(
-            iconOption:  Icons.priority_high ,size: sizeOption,color: colorOption,
-            textDescription: "Mẹo thi kết quả cao")),
-      ),
-    );
+        Stack(
+            alignment: new Alignment(0.0, 0.9),
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SignPage();
+                  }));
+                },
+                child: new Container(
+                  width: 150.0,
+                  height: 150.0,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black54.withOpacity(0.4),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: new Container(
+                    padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 42.0, top:12.0),
+                    child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                  )
+                ),
+              ),
+              //Container(height: 30,color: Colors.blue,),
+
+              new Container(
+                padding: const EdgeInsets.only(left: 10.0,right: 10.0, ),
+                decoration: new BoxDecoration(
+                ),
+                child: new Text('Mẹo thi kết quả cao', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              )
+
+            ]
+    ));
     options.add(
-      GestureDetector(
-/*        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return SignPage();
-          }));
-        },*/
-        child: optionObject(OptionObject(
-            iconOption:  Icons.search ,size: sizeOption,color: Colors.blue,
-            textDescription: "Tra cứu luật nhanh")),
-      ),
-    );
+        Stack(
+            alignment: new Alignment(0.0, 0.9),
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SignPage();
+                  }));
+                },
+                child: new Container(
+                  width: 150.0,
+                  height: 150.0,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black54.withOpacity(0.7),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 4), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                    child: new Container(
+                        padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
+                        child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                    )
+                ),
+              ),
+              //Container(height: 30,color: Colors.blue,),
+
+              new Container(
+                padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 3.0),
+                decoration: new BoxDecoration(
+
+                ),
+                child: new Text('Tra cứu luật nhanh', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              )
+
+            ]
+    ));
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Ôn thi GPLX B2',
         ),
+        centerTitle: true,
+
       ),
+      drawer:_drawerbuild(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
 
         children: <Widget>[
           Container(
-            height: 120.0,
+            height: MediaQuery.of(context).size.height/4,
             child: new ListView(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
@@ -128,19 +420,21 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(left: 10.0,right: 10.0),
-            height: (MediaQuery.of(context).size.height/2),
+            padding: EdgeInsets.only(top: 15.0,),
+            key: slidekey,
+            color: Colors.lightBlue,
+            height: (MediaQuery.of(context).size.height/4)*3-80.0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Expanded(
                   child: GridView.count(
-                      crossAxisCount: 3,
-                      childAspectRatio: 1.0,
-                      padding: const EdgeInsets.all(4.0),
-                      mainAxisSpacing: 10.0,
-                      crossAxisSpacing: 10.0,
-                      children: options
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.0,
+                    padding: const EdgeInsets.only(top:10.0, left: 70.0, right: 70.0),
+                    mainAxisSpacing: 20.0,
+                    crossAxisSpacing: 40.0,
+                    children: options
                   ),
                 ),
 
