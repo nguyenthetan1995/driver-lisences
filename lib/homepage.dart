@@ -21,6 +21,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             new DrawerHeader(
               child: new Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/background/background-01.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 child: new Column(
                   children: <Widget>[
                     new Text('Nguyen The Tan',style: TextStyle(color: Colors.white),)
@@ -113,16 +119,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black54.withOpacity(0.4),
+                    color: Colors.black54.withOpacity(0.7),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: Offset(3.0, 3.0),// changes position of shadow
                   ),
                 ],
               ),
                 child: new Container(
-                    padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
-                    child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                    padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
+                    child: new Image.asset('assets/book.png',fit: BoxFit.fill,)
                 )
             ),
           ),
@@ -161,16 +167,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.4),
+                        color: Colors.black54.withOpacity(0.7),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: Offset(3.0, 3.0), // changes position of shadow
                       ),
                     ],
                   ),
                     child: new Container(
-                        padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
+                        child: new Image.asset('assets/book_2.png',fit: BoxFit.fill,)
                     )
                 ),
               ),
@@ -210,16 +216,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.4),
+                        color: Colors.black54.withOpacity(0.7),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: Offset(3.0, 3.0), // changes position of shadow
                       ),
                     ],
                   ),
                     child: new Container(
-                        padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
+                        child: new Image.asset('assets/traffic.png',fit: BoxFit.fill,)
                     )
                 ),
               ),
@@ -258,16 +264,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.4),
+                        color: Colors.black54.withOpacity(0.7),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: Offset(3.0, 3.0), // changes position of shadow
                       ),
                     ],
                   ),
                     child: new Container(
-                        padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
+                        child: new Image.asset('assets/random.png',fit: BoxFit.fill,)
                     )
                 ),
               ),
@@ -306,16 +312,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.4),
+                        color: Colors.black54.withOpacity(0.7),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: Offset(3.0, 3.0),// changes position of shadow
                       ),
                     ],
                   ),
                   child: new Container(
                     padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 42.0, top:12.0),
-                    child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                    child: new Image.asset('assets/light.png',fit: BoxFit.fill,)
                   )
                 ),
               ),
@@ -356,13 +362,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.black54.withOpacity(0.7),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 4), // changes position of shadow
+                        offset: Offset(3.0, 3.0), // changes position of shadow
                       ),
                     ],
                   ),
                     child: new Container(
-                        padding: const EdgeInsets.only(left: 34.0, right: 34.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/lythuyet.png',fit: BoxFit.fill,)
+                        padding: const EdgeInsets.only(left: 38.0, right: 38.0, bottom: 47.0, top:12.0),
+                        child: new Image.asset('assets/search.png',fit: BoxFit.cover,)
                     )
                 ),
               ),
@@ -406,7 +412,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: ImageAutoSlider(
                       assetImages: [
-                        AssetImage('assets/img1.png'),
+                        AssetImage('assets/background/background-01.jpg'),
                         AssetImage('assets/img2.jpg'),
                         AssetImage('assets/img3.jpeg')
                       ],
@@ -420,9 +426,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/background/blue.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
             padding: EdgeInsets.only(top: 15.0,),
             key: slidekey,
-            color: Colors.lightBlue,
             height: (MediaQuery.of(context).size.height/4)*3-80.0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,

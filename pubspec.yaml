@@ -51,10 +51,15 @@ flutter:
   - assets/databases/data.sqlite
   - assets/icon/
   - assets/imghome/
-  - assets/img1.png
+  - assets/background/
   - assets/img2.jpg
   - assets/img3.jpeg
-  - assets/lythuyet.png
+  - assets/book.png
+  - assets/book_2.png
+  - assets/light.png
+  - assets/random.png
+  - assets/search.png
+  - assets/traffic.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
