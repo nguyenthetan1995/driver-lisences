@@ -21,20 +21,17 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             new DrawerHeader(
               child: new Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/background/background-01.jpg"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
                 child: new Column(
                   children: <Widget>[
-                    new Text('Nguyen The Tan',style: TextStyle(color: Colors.white),)
+
                   ],
                 ),
               ),
               decoration: new BoxDecoration(
-                  color: Colors.blue
+                image: DecorationImage(
+                  image: AssetImage("assets/background/background-01.jpg"),
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             new Container(
@@ -128,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
                 child: new Container(
                     padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
-                    child: new Image.asset('assets/book.png',fit: BoxFit.fill,)
+                    child: new Image.asset('assets/imghome/book.png',fit: BoxFit.fill,)
                 )
             ),
           ),
@@ -176,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                     child: new Container(
                         padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/book_2.png',fit: BoxFit.fill,)
+                        child: new Image.asset('assets/imghome/book_2.png',fit: BoxFit.fill,)
                     )
                 ),
               ),
@@ -225,7 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                     child: new Container(
                         padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/traffic.png',fit: BoxFit.fill,)
+                        child: new Image.asset('assets/imghome/traffic_sign.png',fit: BoxFit.fill,)
                     )
                 ),
               ),
@@ -273,7 +270,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                     child: new Container(
                         padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/random.png',fit: BoxFit.fill,)
+                        child: new Image.asset('assets/imghome/random.png',fit: BoxFit.fill,)
                     )
                 ),
               ),
@@ -321,7 +318,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   child: new Container(
                     padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 42.0, top:12.0),
-                    child: new Image.asset('assets/light.png',fit: BoxFit.fill,)
+                    child: new Image.asset('assets/imghome/light.png',fit: BoxFit.fill,)
                   )
                 ),
               ),
@@ -367,8 +364,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                     child: new Container(
-                        padding: const EdgeInsets.only(left: 38.0, right: 38.0, bottom: 47.0, top:12.0),
-                        child: new Image.asset('assets/search.png',fit: BoxFit.cover,)
+                        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 47.0, top:12.0),
+                        child: new Image.asset('assets/imghome/search.png',fit: BoxFit.fill,)
                     )
                 ),
               ),
@@ -429,12 +426,12 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/background/blue.jpg"),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             padding: EdgeInsets.only(top: 15.0,),
             key: slidekey,
-            height: (MediaQuery.of(context).size.height/4)*3-80.0,
+            height:MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height/4)-56.0-24,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[

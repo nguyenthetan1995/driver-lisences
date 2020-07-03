@@ -33,14 +33,12 @@ class _ListExamPage1State extends State<ListExamPage1> {
   Future<List<TestModel>> InitDataTest()async{
     final prefs = await SharedPreferences.getInstance();
     String dataText = prefs.getString('testData');
-    print('dataText');
-    print(dataText);
     var result=List<TestModel>();
     if(dataText==null)
     {
       // TODO: Check List Test
       // TODO: Create List Test and save
-      for (var i=0;i<10;i++)
+      for (var i=0;i<19;i++)
       {
         var questions= await RamdomTestData();
         var testModel=new TestModel(
@@ -74,6 +72,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
 
     await initializeDatabase().then((v) async {
       listModelQuestion = await getAllListQuestion(v);
+
     });
     if (listModelQuestion.length != 0) {
       for (int i = 0; i < 21; i++) {
@@ -192,22 +191,35 @@ class _ListExamPage1State extends State<ListExamPage1> {
         } ,
         child: Card(
           child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              gradient: LinearGradient(
+                // Where the linear gradient begins and ends
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                // Add one stop for each color. Stops should increase from 0 to 1
+                stops: [0.1, 0.9],
+                colors: [
+                  // Colors are easy thanks to Flutter's Colors class.
+                  Colors.white,
+                  Colors.white
+                ],
+              ),
+            ),
             width: MediaQuery.of(context).size.width,
+            height: 100.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Đề số ${test.number}',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  'Đề số ${test.number} (30 câu)',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '${test.status}',
-                  style: TextStyle(fontSize: 18),
+                  'Thời gian 30 phút',
+                  style: TextStyle(fontSize: 16, letterSpacing: 2.0),
                 ),
-                Text(
-                  '${test.number}/30 Câu',
-                  style: TextStyle(fontSize: 18),
-                ),
+
               ],
             ),
           ),
@@ -218,18 +230,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       appBar: AppBar(
         title: Text('Thi sát hạch'),
       ),
-      body: GestureDetector(
-        onTap: () {
-
-        },
-        child: new GridView.count(
-            crossAxisCount: 3,
-            childAspectRatio: 1.0,
-            padding: const EdgeInsets.all(4.0),
-            mainAxisSpacing: 1.0,
-            crossAxisSpacing: 1.0,
-            children: exams),
-      ),
+      body: Container(
+        child: new ListView(
+          children: exams
+        ),
+      )
     );
   }
 }
