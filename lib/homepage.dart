@@ -116,10 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black54.withOpacity(0.7),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(3.0, 3.0),// changes position of shadow
+                    color: Colors.black12.withOpacity(0.4),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(6.0, 6.0),// changes position of shadow
                   ),
                 ],
               ),
@@ -164,10 +164,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.7),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(3.0, 3.0), // changes position of shadow
+                        color: Colors.black12.withOpacity(0.4),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(6.0, 6.0), // changes position of shadow
                       ),
                     ],
                   ),
@@ -213,10 +213,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.7),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(3.0, 3.0), // changes position of shadow
+                        color: Colors.black12.withOpacity(0.4),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(6.0, 6.0), // changes position of shadow
                       ),
                     ],
                   ),
@@ -261,10 +261,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.7),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(3.0, 3.0), // changes position of shadow
+                        color: Colors.black12.withOpacity(0.4),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(6.0, 6.0), // changes position of shadow
                       ),
                     ],
                   ),
@@ -309,10 +309,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.7),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(3.0, 3.0),// changes position of shadow
+                        color: Colors.black12.withOpacity(0.4),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(6.0, 6.0),// changes position of shadow
                       ),
                     ],
                   ),
@@ -356,10 +356,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black54.withOpacity(0.7),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(3.0, 3.0), // changes position of shadow
+                        color: Colors.black12.withOpacity(0.4),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(6.0, 6.0), // changes position of shadow
                       ),
                     ],
                   ),

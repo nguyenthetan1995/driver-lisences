@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_license_driver/processdatabase.dart';
@@ -142,33 +143,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
   }
   @override
   Widget build(BuildContext context) {
-    /*exams.clear();
-    int numQues = 1;
 
-    for (int i = 1; i <=10; i ++){
-      exams.add(Card(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Đề số $i',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                status,
-                style: TextStyle(fontSize: 18),
-              ),
-              Text(
-                '$numQues/30 Câu',
-                style: TextStyle(fontSize: 18),
-              ),
-            ],
-          ),
-        ),
-      ));
-    }*/
     if(testData.length==0)
     {
       return Container(
@@ -183,54 +158,101 @@ class _ListExamPage1State extends State<ListExamPage1> {
 
     for (int i = 0; i <testData.length; i ++){
       var test=testData[i];
-      exams.add(GestureDetector(
-        onTap:(){
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return ExamPage(testModel: test,);
-          }));
-        } ,
-        child: Card(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              gradient: LinearGradient(
-                // Where the linear gradient begins and ends
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                // Add one stop for each color. Stops should increase from 0 to 1
-                stops: [0.1, 0.9],
-                colors: [
-                  // Colors are easy thanks to Flutter's Colors class.
-                  Colors.white,
-                  Colors.white
+      exams.add(
+        Container(
+          
+          padding: const EdgeInsets.all(0.0),
+          margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) {
+                return ExamPage(testModel: test,);
+              }));
+            },
+            child: Container(
+              padding: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                gradient: LinearGradient(
+                  // Where the linear gradient begins and ends
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  // Add one stop for each color. Stops should increase from 0 to 1
+                  stops: [0.1, 0.9],
+                  colors: [
+                    // Colors are easy thanks to Flutter's Colors class.
+                    Colors.white,
+                    Colors.white
+                  ],
+                ),
+              ),
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              height: 90.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                          width: 70.0,
+                          margin: EdgeInsets.only(left: 10.0, right: 10.0),
+
+                          height: 60,
+                          child:Center(
+                            child:Text('${test.number}', style: TextStyle(color: Colors.blue,fontFamily: 'city_boy', fontSize: 34.0),textAlign: TextAlign.center,)
+                          ),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xFFe0f2f1)),
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Đề số ${test.number} (30 câu)',
+                        style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold,),
+                      ),
+                      Text(
+                        'Thời gian 30 phút',
+                        style: TextStyle(fontSize: 16,
+                            letterSpacing: 2.0,
+                            color: Colors.black54,
+                            height: 2.0),
+                      ),
+                    ],
+                  ),
+                  new Spacer(), // I just added one line
+                  Icon(Icons.navigate_next, color: Colors.black45,
+                    size: 35.0,)
+
                 ],
               ),
             ),
-            width: MediaQuery.of(context).size.width,
-            height: 100.0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Đề số ${test.number} (30 câu)',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Thời gian 30 phút',
-                  style: TextStyle(fontSize: 16, letterSpacing: 2.0),
-                ),
-
-              ],
-            ),
           ),
         ),
-      ));
+
+
+      );
     }
     return Scaffold(
       appBar: AppBar(
         title: Text('Thi sát hạch'),
       ),
       body: Container(
+        color: Colors.black12.withOpacity(0.1),
         child: new ListView(
           children: exams
         ),
