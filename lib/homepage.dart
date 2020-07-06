@@ -422,33 +422,36 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/background/blue.jpg"),
-                fit: BoxFit.fill,
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/background/blue.jpg"),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              padding: EdgeInsets.only(top: 15.0,),
+              key: slidekey,
+              height:MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height/4)-56.0-34.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: GridView.count(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.1,
+                        padding: const EdgeInsets.only(top:10.0, left: 60.0, right: 60.0),
+                        mainAxisSpacing: 20.0,
+                        crossAxisSpacing: 40.0,
+                        children: options
+                    ),
+                  ),
+
+                ],
               ),
             ),
-            padding: EdgeInsets.only(top: 15.0,),
-            key: slidekey,
-            height:MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height/4)-56.0-24,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.0,
-                    padding: const EdgeInsets.only(top:10.0, left: 70.0, right: 70.0),
-                    mainAxisSpacing: 20.0,
-                    crossAxisSpacing: 40.0,
-                    children: options
-                  ),
-                ),
-
-              ],
-            ),
           ),
+
         ],
       )
     );

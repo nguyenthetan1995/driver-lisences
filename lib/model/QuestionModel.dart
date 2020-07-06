@@ -14,7 +14,7 @@ class QuestionModel{
   String zImageQuestion;
   String zAnswer;
   String zAnswerDesc;
-  List<int> UserChoses;
+  List<dynamic> UserChoses;
   QuestionModel({
     this.zQuestion,
     this.zOption1,

@@ -39,9 +39,10 @@ class _ListExamPage1State extends State<ListExamPage1> {
     {
       // TODO: Check List Test
       // TODO: Create List Test and save
-      for (var i=0;i<19;i++)
+      for (var i=0;i<20;i++)
       {
         var questions= await RamdomTestData();
+
         var testModel=new TestModel(
           id: i+1,number: i+1,Questions: questions,status: "Lam bai",
         );
@@ -60,6 +61,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
   }
   Future<List<QuestionModel>>  RamdomTestData() async
   {
+    bool Isconnect = false;
     List<QuestionModel> listModelQuestion = [];
     List<QuestionModel> listModelQuestion431 = [];
     List<QuestionModel> listModelQuestion432 = [];
@@ -70,76 +72,94 @@ class _ListExamPage1State extends State<ListExamPage1> {
     List<QuestionModel> listModelQuestion48 = [];
     List<QuestionModel> listModelQuestion49 = [];
     List<QuestionModel> listQuestionExam = List<QuestionModel>();
+    if(Isconnect == false){
+      await initializeDatabase().then((v) async {
+        listModelQuestion = await getAllListQuestion(v);
+        Isconnect = true;
 
-    await initializeDatabase().then((v) async {
-      listModelQuestion = await getAllListQuestion(v);
-
-    });
+      });
+    }
     if (listModelQuestion.length != 0) {
-      for (int i = 0; i < 21; i++) {
+      for (int i = 0; i < 166; i++) {
         listModelQuestion431.add(listModelQuestion[i]);
       }
-      QuestionModel question431 =
-      listModelQuestion431[Random().nextInt(listModelQuestion431.length)];
-      listQuestionExam.add(question431);
+      for (int i = 1; i <= 7; i++) {
+        QuestionModel question431 =
+        listModelQuestion431[Random().nextInt(listModelQuestion431.length)];
+        listQuestionExam.add(question431);
+      }
 
-      for (int i = 21; i < 131; i++) {
+      for (int i = 167; i < 192; i++) {
         listModelQuestion432.add(listModelQuestion[i]);
       }
-      for (int i = 1; i <= 7; i++) {
+      for (int i = 1; i <= 2; i++) {
         QuestionModel question432 =
         listModelQuestion432[Random().nextInt(listModelQuestion432.length)];
         listQuestionExam.add(question432);
       }
 
-      for (int i = 131; i < 145; i++) {
+      for (int i = 193; i < 213; i++) {
         listModelQuestion433.add(listModelQuestion[i]);
       }
-      QuestionModel question433 =
-      listModelQuestion433[Random().nextInt(listModelQuestion433.length)];
-      listQuestionExam.add(question433);
+      for (int i = 1; i <= 2; i++) {
+        QuestionModel question433 =
+        listModelQuestion433[Random().nextInt(listModelQuestion433.length)];
+        listQuestionExam.add(question433);
+      }
 
-      for (int i = 145; i < 175; i++) {
+
+      for (int i = 214; i < 269; i++) {
         listModelQuestion44.add(listModelQuestion[i]);
       }
-      QuestionModel question44 =
-      listModelQuestion44[Random().nextInt(listModelQuestion44.length)];
-      listQuestionExam.add(question44);
+      for (int i = 1; i <= 2; i++) {
+        QuestionModel question44 =
+        listModelQuestion44[Random().nextInt(listModelQuestion44.length)];
+        listQuestionExam.add(question44);
+      }
 
-      for (int i = 175; i < 200; i++) {
+
+      for (int i = 270; i < 304; i++) {
         listModelQuestion45.add(listModelQuestion[i]);
       }
-      QuestionModel question45 =
-      listModelQuestion45[Random().nextInt(listModelQuestion45.length)];
-      listQuestionExam.add(question45);
+      for (int i = 1; i <= 2; i++) {
+        QuestionModel question45 =
+        listModelQuestion45[Random().nextInt(listModelQuestion45.length)];
+        listQuestionExam.add(question45);
+      }
 
-      for (int i = 200; i < 255; i++) {
+
+      for (int i = 305; i < 486; i++) {
         listModelQuestion4647.add(listModelQuestion[i]);
       }
-      QuestionModel question4647 =
-      listModelQuestion4647[Random().nextInt(listModelQuestion4647.length)];
-      listQuestionExam.add(question4647);
+      for (int i = 1; i <= 10; i++) {
+        QuestionModel question4647 =
+        listModelQuestion4647[Random().nextInt(listModelQuestion4647.length)];
+        listQuestionExam.add(question4647);
+      }
 
-      for (int i = 255; i < 355; i++) {
+
+      for (int i = 487; i < 600; i++) {
         listModelQuestion48.add(listModelQuestion[i]);
       }
-      for (int i = 1; i <= 9; i++) {
+      for (int i = 1; i <= 10; i++) {
         QuestionModel question48 =
         listModelQuestion48[Random().nextInt(listModelQuestion48.length)];
         listQuestionExam.add(question48);
       }
 
-      for (int i = 355; i < 450; i++) {
+      /*for (int i = 355; i < 450; i++) {
         listModelQuestion49.add(listModelQuestion[i]);
       }
       for (int i = 1; i <= 9; i++) {
         QuestionModel question49 =
         listModelQuestion49[Random().nextInt(listModelQuestion49.length)];
         listQuestionExam.add(question49);
-      }
+      }*/
 
     }
+    print(listQuestionExam);
     return listQuestionExam;
+
   }
   @override
   Widget build(BuildContext context) {
@@ -207,12 +227,20 @@ class _ListExamPage1State extends State<ListExamPage1> {
                           margin: EdgeInsets.only(left: 10.0, right: 10.0),
 
                           height: 60,
-                          child:Center(
-                            child:Text('${test.number}', style: TextStyle(color: Colors.blue,fontFamily: 'city_boy', fontSize: 34.0),textAlign: TextAlign.center,)
+                          child:Stack(
+                            children: <Widget>[
+                              Container(
+                                child:Text('${test.number}', style: TextStyle(color: Colors.blue,fontFamily: 'city_boy', fontSize: 34.0),textAlign: TextAlign.center,),
+                                padding: EdgeInsets.only(bottom: 4.0, right: 7.0),
+                                alignment: Alignment.center,
+                              ),
+                              GestureDetector(
+                                child: new Image.asset('assets/imghome/circle.png',fit: BoxFit.fill,)
+                              )
+
+                            ]
                           ),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color(0xFFe0f2f1)),
+
                       )
                     ],
                   ),
@@ -221,12 +249,12 @@ class _ListExamPage1State extends State<ListExamPage1> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Đề số ${test.number} (30 câu)',
+                        'Đề số ${test.number} (35 câu)',
                         style: TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold,),
                       ),
                       Text(
-                        'Thời gian 30 phút',
+                        'Thời gian 22 phút',
                         style: TextStyle(fontSize: 16,
                             letterSpacing: 2.0,
                             color: Colors.black54,
