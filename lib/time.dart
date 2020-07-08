@@ -21,7 +21,7 @@ class CountDownTimeState extends State<CountDownTime> with TickerProviderStateMi
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: Duration(seconds: 1320),
     );
 
     // ..addStatusListener((status) {

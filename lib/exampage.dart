@@ -1,18 +1,23 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:test_license_driver/model/TestModel.dart';
-import 'package:test_license_driver/processdatabase.dart';
-import 'package:test_license_driver/time.dart';
+import 'package:countdown_flutter/countdown_flutter.dart';
 import 'model/QuestionModel.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'dart:math' as math;
 
 class ExamPage extends StatefulWidget {
   ExamPage({this.testModel});
   TestModel testModel;
+  StreamController _stream;
+
   @override
   _ExamPageState createState() => _ExamPageState();
 }
 
-class _ExamPageState extends State<ExamPage>  with SingleTickerProviderStateMixin  {
+class _ExamPageState extends State<ExamPage>
+    with SingleTickerProviderStateMixin {
   List<QuestionModel> listModelQuestion = [];
   List<QuestionModel> listModelQuestion431 = [];
   List<QuestionModel> listModelQuestion432 = [];
@@ -27,41 +32,45 @@ class _ExamPageState extends State<ExamPage>  with SingleTickerProviderStateMixi
   List<Widget> lstTabs = [];
   List<Widget> lstQues = [];
   TabController _controller;
+
   @override
   void initState() {
-
     super.initState();
-    listQuestionExam =  widget.testModel.Questions;
-    print(listQuestionExam.length);
+    listQuestionExam = widget.testModel.Questions;
     _controller = TabController(vsync: this, length: listQuestionExam.length);
     for (var i = 0; i < listQuestionExam.length; i++) {
-      lstTabs.add(Tab(
-        child: Text(
-          'Câu ${i + 1}',
-          style: TextStyle(fontSize: 18),
+      lstTabs.add(
+        Tab(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Câu ${i + 1}/35',
+                style: TextStyle(fontSize: 18),
+              ),
+            ],
+          ),
         ),
-      ));
-      lstQues = (buildListView(listQuestionExam,_controller));
-      for (QuestionModel question in listQuestionExam) {
-        //this.question = question;
-      }
+      );
+      lstQues = (buildListView(listQuestionExam, _controller));
     }
-    print(lstTabs.length);
-    print(lstQues.length);
-
 
     _controller.addListener(_handleTabSelection);
 //    initializeDatabase().then((v) async {
 //      this.listModelQuestion = await getAllListQuestion(v);
-//      setState(() {});
+////      setState(() {});
 //    });
   }
 
+  int _tabIndex = 0;
+  void _nextPage(int delta) {
+    final int newIndex = _controller.index + delta;
+    if (newIndex < 0 || newIndex >= _controller.length) return;
+    _controller.animateTo(newIndex);
+  }
 
-
-  int _currentIndex=0;
-  void _handleTabSelection()
-  {
+  int _currentIndex = 0;
+  void _handleTabSelection() {
     setState(() {
       _currentIndex = _controller.index;
     });
@@ -69,160 +78,116 @@ class _ExamPageState extends State<ExamPage>  with SingleTickerProviderStateMixi
     print(_controller.index);
     // to save index-1
   }
+
   @override
   Widget build(BuildContext context) {
-    /*listQuestionExam.clear();
-    listModelQuestion431.clear();
-    listModelQuestion432.clear();
-    listModelQuestion44.clear();
-    listModelQuestion45.clear();
-    listModelQuestion4647.clear();
-    listModelQuestion48.clear();
-    listModelQuestion49.clear();*/
-    /*if (listModelQuestion.length == 0)
-      return Container(
-        color: Colors.white,
-        child: Center(
-          child: CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-          ),
-        ),
-      );
-    if (listModelQuestion.length != 0) {
-      for (int i = 0; i < 21; i++) {
-        this.listModelQuestion431.add(listModelQuestion[i]);
-      }
-      QuestionModel question431 =
-          listModelQuestion431[Random().nextInt(listModelQuestion431.length)];
-      listQuestionExam.add(question431);
-
-      for (int i = 21; i < 131; i++) {
-        this.listModelQuestion432.add(listModelQuestion[i]);
-      }
-      for (int i = 1; i <= 7; i++) {
-        QuestionModel question432 =
-            listModelQuestion432[Random().nextInt(listModelQuestion432.length)];
-        listQuestionExam.add(question432);
-      }
-
-      for (int i = 131; i < 145; i++) {
-        this.listModelQuestion433.add(listModelQuestion[i]);
-      }
-      QuestionModel question433 =
-          listModelQuestion433[Random().nextInt(listModelQuestion433.length)];
-      listQuestionExam.add(question433);
-
-      for (int i = 145; i < 175; i++) {
-        this.listModelQuestion44.add(listModelQuestion[i]);
-      }
-      QuestionModel question44 =
-          listModelQuestion44[Random().nextInt(listModelQuestion44.length)];
-      listQuestionExam.add(question44);
-
-      for (int i = 175; i < 200; i++) {
-        this.listModelQuestion45.add(listModelQuestion[i]);
-      }
-      QuestionModel question45 =
-          listModelQuestion45[Random().nextInt(listModelQuestion45.length)];
-      listQuestionExam.add(question45);
-
-      for (int i = 200; i < 255; i++) {
-        this.listModelQuestion4647.add(listModelQuestion[i]);
-      }
-      QuestionModel question4647 =
-          listModelQuestion4647[Random().nextInt(listModelQuestion4647.length)];
-      listQuestionExam.add(question4647);
-
-      for (int i = 255; i < 355; i++) {
-        this.listModelQuestion48.add(listModelQuestion[i]);
-      }
-      for (int i = 1; i <= 9; i++) {
-        QuestionModel question48 =
-            listModelQuestion48[Random().nextInt(listModelQuestion48.length)];
-        listQuestionExam.add(question48);
-      }
-
-      for (int i = 355; i < 450; i++) {
-        this.listModelQuestion49.add(listModelQuestion[i]);
-      }
-      for (int i = 1; i <= 9; i++) {
-        QuestionModel question49 =
-            listModelQuestion49[Random().nextInt(listModelQuestion49.length)];
-        listQuestionExam.add(question49);
-      }
-      lstQues.clear();
-      lstTabs.clear();
-      for (var i = 0; i < 30; i++) {
-        lstTabs.add(Tab(
-          child: Text(
-            'Câu ${i + 1}',
-            style: TextStyle(fontSize: 18),
-          ),
-        ));
-        lstQues = (buildListView(listQuestionExam,_controller));
-        for (QuestionModel question in listQuestionExam) {
-          this.question = question;
-        }
-      }
-    }*/
-
-/*    print('listQuestionExam.length: ' + listQuestionExam.length.toString());
-    var value=jsonEncode(listQuestionExam.map((f)=>f.toJson()).toList());
-    var list=jsonDecode(value) as List;
-    print("encode:"+value);
-    var result=list.map((f)=>QuestionModel.fromJson(f)).toList();
-    print("decode:"+result[0].toJson().toString());*/
     return DefaultTabController(
       length: lstTabs.length,
       child: Scaffold(
-          appBar: AppBar(
-            title: Container(
-              padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Đề số 1',
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      CountDownTime(),
-                      Text('ád'),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            bottom: PreferredSize(
-                child: TabBar(
-                  controller: _controller,
-                  isScrollable: true,
-                  unselectedLabelColor: Colors.white.withOpacity(0.5),
-                  indicatorColor: Colors.white,
-                  tabs: lstTabs,
+        appBar: AppBar(
+          title: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Đề số 1',
+                  style: TextStyle(fontSize: 20.0),
                 ),
-                preferredSize: Size.fromHeight(40.0)),
+              ],
+            ),
           ),
-          body: TabBarView(children: lstQues,controller: _controller,)),
+        ),
+        body: TabBarView(
+          controller: _controller,
+          children: lstQues,
+        ),
+        bottomNavigationBar: Container(
+          height: 60,
+          color: Colors.blue,
+          child: Row(
+            children: <Widget>[
+              Container(
+                  child: Center(
+                child: IconButton(
+                  tooltip: 'Quay lại',
+                  icon: const Icon(
+                    Icons.chevron_left,
+                    color: Colors.white,
+                    size: 45.0,
+                  ),
+                  onPressed: () {
+                    _nextPage(-1);
+                  },
+                ),
+              )),
+              Expanded(
+                child: Center(
+                  child: CountdownFormatted(
+                    duration: Duration(minutes: 22),
+                    builder: (BuildContext ctx, String remaining) {
+                      return Text(
+                        remaining,
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ); // 01:00:00
+                    },
+                  ),
+                ),
+              ),
+              Container(
+                  child: _controller.index != (lstTabs.length - 1)
+                      ? IconButton(
+                          icon: const Icon(
+                            Icons.chevron_right,
+                            color: Colors.white,
+                            size: 45.0,
+                          ),
+                          tooltip: 'Câu kế tiếp',
+                          onPressed: () {
+                            _nextPage(1);
+
+                          },
+                        )
+                      : IconButton(
+                          icon: const Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 45.0,
+                          ),
+                          tooltip: 'Kết quả',
+                          onPressed: () {
+                            /*widget._stream.add(newdata)*/
+                            
+                           /* widget._stream.stream.listen((event) {
+                              setState(() {
+
+                              });
+                            });*/
+                            _settingModalBottomSheet([context,lstQues]);
+                          },
+                        ))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
 
-List<Widget> buildListView(List<QuestionModel> list,TabController controller) {
-  return list.map((f) => CheckQuestion(f)).toList();
+List<Widget> buildListView(List<QuestionModel> list, TabController controller) {
+  return list.map((e) => CheckQuestion(list.indexOf(e), e)).toList();
 }
 
 class CheckQuestion extends StatefulWidget {
-  CheckQuestion(this.question);
+  CheckQuestion(this.index, this.question);
   final QuestionModel question;
+  final int index;
   @override
   _CheckQuestionState createState() => _CheckQuestionState();
 }
 
-class _CheckQuestionState extends State<CheckQuestion> {
 
+
+class _CheckQuestionState extends State<CheckQuestion> {
   List<String> answers = [];
 
   var selectedText = List<String>();
@@ -236,11 +201,13 @@ class _CheckQuestionState extends State<CheckQuestion> {
       }
     });
   }
+
   @override
   void dispose() {
     print("dispose:");
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -251,7 +218,7 @@ class _CheckQuestionState extends State<CheckQuestion> {
             child: Container(
               padding: EdgeInsets.all(5),
               child: Text(
-                widget.question?.zQuestion ?? '',
+                'Câu ${widget.index + 1}: ' + widget.question?.zQuestion ?? '',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
@@ -259,7 +226,7 @@ class _CheckQuestionState extends State<CheckQuestion> {
           SizedBox(
             height: 5,
           ),
-          (widget.question.zImageQuestion == null)
+          (widget.question.zImageQuestion == '')
               ? Container()
               : Container(
                   height: 200,
@@ -273,8 +240,9 @@ class _CheckQuestionState extends State<CheckQuestion> {
             child: CheckboxListTile(
               onChanged: (b) {
                 onChange(b, widget.question?.zOption1);
-                (b)?answers.add('1'):answers.remove('1');
-                print(answers);
+                (b) ? answers.add('1') : answers.remove('1');
+                widget.question?.UserChoses = answers;
+                print(widget.question?.UserChoses);
               },
               value: selectedText.contains(widget.question?.zOption1),
               selected: selectedText.contains(widget.question?.zOption1),
@@ -286,8 +254,9 @@ class _CheckQuestionState extends State<CheckQuestion> {
             child: CheckboxListTile(
               onChanged: (b) {
                 onChange(b, widget.question?.zOption2);
-                (b)?answers.add('2'):answers.remove('2');
-                print(answers);
+                (b) ? answers.add('2') : answers.remove('2');
+                widget.question?.UserChoses = answers;
+                print(widget.question?.UserChoses);
               },
               value: selectedText.contains(widget.question?.zOption2),
               selected: selectedText.contains(widget.question?.zOption2),
@@ -301,8 +270,9 @@ class _CheckQuestionState extends State<CheckQuestion> {
                   child: CheckboxListTile(
                     onChanged: (b) {
                       onChange(b, widget.question?.zOption3);
-                      (b)?answers.add('3'):answers.remove('3');
-                      print(answers);
+                      (b) ? answers.add('3') : answers.remove('3');
+                      widget.question?.UserChoses = answers;
+                      print(widget.question?.UserChoses);
                     },
                     value: selectedText.contains(widget.question?.zOption3),
                     selected: selectedText.contains(widget.question?.zOption3),
@@ -316,8 +286,8 @@ class _CheckQuestionState extends State<CheckQuestion> {
                   child: CheckboxListTile(
                     onChanged: (b) {
                       onChange(b, widget.question?.zOption4);
-                      (b)?answers.add('4'):answers.remove('4');
-                      print(answers);
+                      (b) ? answers.add('4') : answers.remove('4');
+                      widget.question?.UserChoses = answers;
                     },
                     value: selectedText.contains(widget.question?.zOption4),
                     selected: selectedText.contains(widget.question?.zOption4),
@@ -329,4 +299,93 @@ class _CheckQuestionState extends State<CheckQuestion> {
       ),
     );
   }
+}
+void _settingModalBottomSheet(data){
+  List<Widget> result = [];
+  var number = 0;
+  var ispass = false;
+  for(var i = 0; i < data[1].length ; i++){
+    QuestionModel ques = data[1][i].question;
+    var isCorect = false;
+
+
+    if(ques.UserChoses!=null && ques.UserChoses?.length > 0 ){
+      number ++;
+      if(ques.UserChoses[0] == data[1][i].question.zAnswer)isCorect = true;
+    }
+    else{
+      isCorect = false;
+    }
+    result.add(
+        Container(
+            width: 40.0,
+            height: 30.0,
+            padding: const EdgeInsets.all(5.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0),
+                  bottomLeft: Radius.circular(10.0),
+                  bottomRight: Radius.circular(10.0)
+              ),
+              border: Border.all(
+                  width: 2.0,
+                  color: Colors.black12
+              ),
+            ),
+            child: new Column(
+                 children: <Widget>[
+                   Text('Câu ' + (i+ 1).toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),),
+                   Expanded(
+                     child: Center(
+                       child:isCorect == true ? Icon(Icons.check, color: Colors.blue,size: 30.0,) : Icon(Icons.close,color: Colors.red,size: 30.0)
+                     ),
+                   ),
+                 ],
+            )
+        ),
+    );
+  }
+  if(number  > 31){
+    ispass = true;
+  }
+  showModalBottomSheet(
+      context: data[0],
+      builder: (BuildContext bc){
+
+        return Container(
+          color: Colors.blue,
+          padding: EdgeInsets.all(10.0),
+          child:Column(
+            children: <Widget>[
+              Container(
+                height: 80.0,
+                child: Column(
+                  children: <Widget>[
+                    Center(
+                      child: ispass == true ?
+                      Text('Chúc mừng bạn đã thi đậu!',style: TextStyle(color: Colors.white, fontSize: 30.0),)
+                          : Text('Bạn chưa đậu!',style: TextStyle(color: Colors.white, fontSize: 30.0)),
+                    ) ,
+                    Text(number.toString()+'/35',style: TextStyle(color: Colors.white, fontSize: 30.0)
+                    ),
+                  ],
+                )
+              ),
+              Expanded(
+                  child: GridView.count(
+                      crossAxisCount: 4,
+                      childAspectRatio: 1.1,
+                      padding: const EdgeInsets.only(top:2.0, left: 2.0, right: 2.0),
+                      mainAxisSpacing: 15.0,
+                      crossAxisSpacing: 15.0,
+                      children: result
+                  ),
+              )
+            ],
+          )
+        );
+      }
+  );
 }

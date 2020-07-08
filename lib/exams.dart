@@ -35,6 +35,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
     final prefs = await SharedPreferences.getInstance();
     String dataText = prefs.getString('testData');
     var result=List<TestModel>();
+    dataText=null;
     if(dataText==null)
     {
       // TODO: Check List Test
@@ -63,16 +64,22 @@ class _ListExamPage1State extends State<ListExamPage1> {
   {
     bool Isconnect = false;
     List<QuestionModel> listModelQuestion = [];
-    List<QuestionModel> listModelQuestion431 = [];
-    List<QuestionModel> listModelQuestion432 = [];
-    List<QuestionModel> listModelQuestion433 = [];
-    List<QuestionModel> listModelQuestion44 = [];
-    List<QuestionModel> listModelQuestion45 = [];
-    List<QuestionModel> listModelQuestion4647 = [];
-    List<QuestionModel> listModelQuestion48 = [];
-    List<QuestionModel> listModelQuestion49 = [];
+    List<QuestionModel> listModelQuestion11 = [];
+    List<QuestionModel> listModelQuestion121 = [];
+    List<QuestionModel> listModelQuestion122 = [];
+    List<QuestionModel> listModelQuestion13 = [];
+    List<QuestionModel> listModelQuestion14 = [];
+    List<QuestionModel> listModelQuestion2 = [];
+    List<QuestionModel> listModelQuestion3 = [];
+    List<QuestionModel> listModelQuestion4 = [];
+    List<QuestionModel> listModelQuestion5 = [];
+    List<QuestionModel> listModelQuestion6 = [];
+    List<QuestionModel> listModelQuestion7 = [];
     List<QuestionModel> listQuestionExam = List<QuestionModel>();
+
+
     if(Isconnect == false){
+
       await initializeDatabase().then((v) async {
         listModelQuestion = await getAllListQuestion(v);
         Isconnect = true;
@@ -80,71 +87,92 @@ class _ListExamPage1State extends State<ListExamPage1> {
       });
     }
     if (listModelQuestion.length != 0) {
-      for (int i = 0; i < 166; i++) {
-        listModelQuestion431.add(listModelQuestion[i]);
+      //1 Câu KN
+      for (int i = 0; i < 16; i++) {
+        listModelQuestion11.add(listModelQuestion[i]);
       }
-      for (int i = 1; i <= 7; i++) {
-        QuestionModel question431 =
-        listModelQuestion431[Random().nextInt(listModelQuestion431.length)];
-        listQuestionExam.add(question431);
+      QuestionModel question11 =
+      listModelQuestion11[Random().nextInt(listModelQuestion11.length)];
+      listQuestionExam.add(question11);
+      //7 Câu quy tắc GT
+      for (int i = 17; i < 123; i++) {
+        listModelQuestion121.add(listModelQuestion[i]);
       }
+      for(int i = 0; i < 6 ; i++){
+        QuestionModel question12 =
+        listModelQuestion121[Random().nextInt(listModelQuestion121.length)];
+        listQuestionExam.add(question12);
+      }
+      for (int i = 140; i < 160; i++) {
+        listModelQuestion122.add(listModelQuestion[i]);
+      }
+      QuestionModel question122 =
+      listModelQuestion122[Random().nextInt(listModelQuestion122.length)];
+      listQuestionExam.add(question122);
+      //1 Câu về tình huống an toàn
+      for (int i = 160; i < 166; i++) {
+        listModelQuestion13.add(listModelQuestion[i]);
+      }
+      QuestionModel question13 =
+      listModelQuestion13[Random().nextInt(listModelQuestion13.length)];
+      listQuestionExam.add(question13);
+      //1 Câu về tốc độ
+      for (int i = 124; i < 140; i++) {
+        listModelQuestion14.add(listModelQuestion[i]);
+      }
+      QuestionModel question14 =
+      listModelQuestion14[Random().nextInt(listModelQuestion14.length)];
+      listQuestionExam.add(question14);
 
-      for (int i = 167; i < 192; i++) {
-        listModelQuestion432.add(listModelQuestion[i]);
+      //1 Câu nghiệp vụ vận tải
+      for (int i = 167; i < 193; i++) {
+        listModelQuestion2.add(listModelQuestion[i]);
       }
-      for (int i = 1; i <= 2; i++) {
-        QuestionModel question432 =
-        listModelQuestion432[Random().nextInt(listModelQuestion432.length)];
-        listQuestionExam.add(question432);
-      }
+      QuestionModel question2 =
+      listModelQuestion2[Random().nextInt(listModelQuestion2.length)];
+      listQuestionExam.add(question2);
 
+      //1 Câu về văn hóa, đạo đức người lái xe.
       for (int i = 193; i < 213; i++) {
-        listModelQuestion433.add(listModelQuestion[i]);
+        listModelQuestion3.add(listModelQuestion[i]);
       }
-      for (int i = 1; i <= 2; i++) {
-        QuestionModel question433 =
-        listModelQuestion433[Random().nextInt(listModelQuestion433.length)];
-        listQuestionExam.add(question433);
-      }
-
-
+      QuestionModel question3 =
+      listModelQuestion3[Random().nextInt(listModelQuestion3.length)];
+      listQuestionExam.add(question3);
+      //2 Câu về kỹ thuật lái xe
       for (int i = 214; i < 269; i++) {
-        listModelQuestion44.add(listModelQuestion[i]);
+        listModelQuestion4.add(listModelQuestion[i]);
       }
       for (int i = 1; i <= 2; i++) {
-        QuestionModel question44 =
-        listModelQuestion44[Random().nextInt(listModelQuestion44.length)];
-        listQuestionExam.add(question44);
+        QuestionModel question4 =
+        listModelQuestion4[Random().nextInt(listModelQuestion4.length)];
+        listQuestionExam.add(question4);
       }
-
-
+      //1 Câu sửa chữa xe
       for (int i = 270; i < 304; i++) {
-        listModelQuestion45.add(listModelQuestion[i]);
+        listModelQuestion5.add(listModelQuestion[i]);
       }
-      for (int i = 1; i <= 2; i++) {
-        QuestionModel question45 =
-        listModelQuestion45[Random().nextInt(listModelQuestion45.length)];
-        listQuestionExam.add(question45);
-      }
-
-
+      QuestionModel question5 =
+      listModelQuestion5[Random().nextInt(listModelQuestion5.length)];
+      listQuestionExam.add(question5);
+      //10 Câu biển báo GT
       for (int i = 305; i < 486; i++) {
-        listModelQuestion4647.add(listModelQuestion[i]);
+        listModelQuestion6.add(listModelQuestion[i]);
       }
       for (int i = 1; i <= 10; i++) {
-        QuestionModel question4647 =
-        listModelQuestion4647[Random().nextInt(listModelQuestion4647.length)];
-        listQuestionExam.add(question4647);
+        QuestionModel question6 =
+        listModelQuestion6[Random().nextInt(listModelQuestion6.length)];
+        listQuestionExam.add(question6);
       }
 
-
+      //10 Câu về sa hình
       for (int i = 487; i < 600; i++) {
-        listModelQuestion48.add(listModelQuestion[i]);
+        listModelQuestion7.add(listModelQuestion[i]);
       }
       for (int i = 1; i <= 10; i++) {
-        QuestionModel question48 =
-        listModelQuestion48[Random().nextInt(listModelQuestion48.length)];
-        listQuestionExam.add(question48);
+        QuestionModel question7 =
+        listModelQuestion7[Random().nextInt(listModelQuestion7.length)];
+        listQuestionExam.add(question7);
       }
 
       /*for (int i = 355; i < 450; i++) {
