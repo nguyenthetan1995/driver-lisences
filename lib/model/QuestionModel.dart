@@ -13,6 +13,7 @@ class QuestionModel{
   String zOption4;
   String zImageQuestion;
   String zAnswer;
+  String zQuestionDie;
   String zAnswerDesc;
   List<String> UserChoses;
   QuestionModel({
@@ -24,6 +25,7 @@ class QuestionModel{
     this.zImageQuestion,
     this.zAnswer,
     this.zAnswerDesc,
+    this.zQuestionDie,
     this.UserChoses,
 }
 );
@@ -36,6 +38,7 @@ class QuestionModel{
     result["ZOPTION4"]=this.zOption4;
     result["ZIMAGE"]=this.zImageQuestion;
     result["ZANSWERS"]=this.zAnswer;
+    result["ZQUESTIONDIE"]=this.zQuestionDie;
     result["ZANSWERDESC"]=this.zAnswerDesc;
     result["UserChoses"]=this.UserChoses;
     return result;
@@ -50,6 +53,7 @@ class QuestionModel{
       zOption4: json["ZOPTION4"],
       zImageQuestion: json["ZIMAGE"],
       zAnswer: json["ZANSWERS"],
+      zQuestionDie: json["ZQUESTIONDIE"],
       zAnswerDesc: json["ZANSWERDESC"],
       UserChoses: json["UserChoses"],
     );

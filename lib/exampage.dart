@@ -304,6 +304,7 @@ void _settingModalBottomSheet(data){
   List<Widget> result = [];
   var number = 0;
   var ispass = false;
+  var isDieQuestion = 0;
   for(var i = 0; i < data[1].length ; i++){
     QuestionModel ques = data[1][i].question;
     var isCorect = false;
@@ -311,9 +312,13 @@ void _settingModalBottomSheet(data){
 
     if(ques.UserChoses!=null && ques.UserChoses?.length > 0 ){
       number ++;
-      if(ques.UserChoses[0] == data[1][i].question.zAnswer)isCorect = true;
+      isCorect = true;
+
     }
     else{
+      if(data[1][i].question.zQuestionDie != "" ){
+        isDieQuestion ++;
+      }
       isCorect = false;
     }
     result.add(
@@ -348,6 +353,7 @@ void _settingModalBottomSheet(data){
     );
   }
   if(number  > 31){
+
     ispass = true;
   }
   showModalBottomSheet(
