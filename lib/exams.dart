@@ -93,6 +93,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       }
       QuestionModel question11 =
       listModelQuestion11[Random().nextInt(listModelQuestion11.length)];
+      question11.IsFinish = false;
+      question11.Option1 = false;
+      question11.Option2 = false;
+      question11.Option3 = false;
+      question11.Option4 = false;
       listQuestionExam.add(question11);
       //7 Câu quy tắc GT
       for (int i = 17; i < 123; i++) {
@@ -101,6 +106,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       for(int i = 0; i < 6 ; i++){
         QuestionModel question12 =
         listModelQuestion121[Random().nextInt(listModelQuestion121.length)];
+        question12.IsFinish = false;
+        question12.Option1 = false;
+        question12.Option2 = false;
+        question12.Option3 = false;
+        question12.Option4 = false;
         listQuestionExam.add(question12);
       }
       for (int i = 140; i < 160; i++) {
@@ -108,6 +118,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       }
       QuestionModel question122 =
       listModelQuestion122[Random().nextInt(listModelQuestion122.length)];
+      question122.IsFinish = false;
+      question122.Option1 = false;
+      question122.Option2 = false;
+      question122.Option3 = false;
+      question122.Option4 = false;
       listQuestionExam.add(question122);
       //1 Câu về tình huống an toàn
       for (int i = 160; i < 166; i++) {
@@ -115,6 +130,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       }
       QuestionModel question13 =
       listModelQuestion13[Random().nextInt(listModelQuestion13.length)];
+      question13.IsFinish = false;
+      question13.Option1 = false;
+      question13.Option2 = false;
+      question13.Option3 = false;
+      question13.Option4 = false;
       listQuestionExam.add(question13);
       //1 Câu về tốc độ
       for (int i = 124; i < 140; i++) {
@@ -122,6 +142,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       }
       QuestionModel question14 =
       listModelQuestion14[Random().nextInt(listModelQuestion14.length)];
+      question14.IsFinish = false;
+      question14.Option1 = false;
+      question14.Option2 = false;
+      question14.Option3 = false;
+      question14.Option4 = false;
       listQuestionExam.add(question14);
 
       //1 Câu nghiệp vụ vận tải
@@ -130,6 +155,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       }
       QuestionModel question2 =
       listModelQuestion2[Random().nextInt(listModelQuestion2.length)];
+      question2.IsFinish = false;
+      question2.Option1 = false;
+      question2.Option2 = false;
+      question2.Option3 = false;
+      question2.Option4 = false;
       listQuestionExam.add(question2);
 
       //1 Câu về văn hóa, đạo đức người lái xe.
@@ -138,6 +168,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       }
       QuestionModel question3 =
       listModelQuestion3[Random().nextInt(listModelQuestion3.length)];
+      question3.IsFinish = false;
+      question3.Option1 = false;
+      question3.Option2 = false;
+      question3.Option3 = false;
+      question3.Option4 = false;
       listQuestionExam.add(question3);
       //2 Câu về kỹ thuật lái xe
       for (int i = 214; i < 269; i++) {
@@ -146,6 +181,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       for (int i = 1; i <= 2; i++) {
         QuestionModel question4 =
         listModelQuestion4[Random().nextInt(listModelQuestion4.length)];
+        question4.IsFinish = false;
+        question4.Option1 = false;
+        question4.Option2 = false;
+        question4.Option3 = false;
+        question4.Option4 = false;
         listQuestionExam.add(question4);
       }
       //1 Câu sửa chữa xe
@@ -154,6 +194,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       }
       QuestionModel question5 =
       listModelQuestion5[Random().nextInt(listModelQuestion5.length)];
+      question5.IsFinish = false;
+      question5.Option1 = false;
+      question5.Option2 = false;
+      question5.Option3 = false;
+      question5.Option4 = false;
       listQuestionExam.add(question5);
       //10 Câu biển báo GT
       for (int i = 305; i < 486; i++) {
@@ -162,6 +207,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       for (int i = 1; i <= 10; i++) {
         QuestionModel question6 =
         listModelQuestion6[Random().nextInt(listModelQuestion6.length)];
+        question6.IsFinish = false;
+        question6.Option1 = false;
+        question6.Option2 = false;
+        question6.Option3 = false;
+        question6.Option4 = false;
         listQuestionExam.add(question6);
       }
 
@@ -172,6 +222,11 @@ class _ListExamPage1State extends State<ListExamPage1> {
       for (int i = 1; i <= 10; i++) {
         QuestionModel question7 =
         listModelQuestion7[Random().nextInt(listModelQuestion7.length)];
+        question7.IsFinish = false;
+        question7.Option1 = false;
+        question7.Option2 = false;
+        question7.Option3 = false;
+        question7.Option4 = false;
         listQuestionExam.add(question7);
       }
 
