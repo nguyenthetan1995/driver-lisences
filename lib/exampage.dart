@@ -256,7 +256,7 @@ class _CheckQuestionState extends State<CheckQuestion> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: CheckAnswer(Answer:widget.question,index:widget.index)
+      child: new CheckAnswer(Answer:widget.question,index:widget.index)
       /*Container(
         child:ListView(
           children: <Widget>[
@@ -399,15 +399,14 @@ void _settingModalBottomSheet(data){
   for(var i = 0; i < data[1].length ; i++){
     QuestionModel ques = data[1][i].question;
     var isCorect = false;
-    if(ques.UserChoses!=null && ques.UserChoses?.length > 0 ){
-      if(ques.UserChoses[0] == ques.zAnswer){
+    if(ques.UserChoses!=null ){
+      if(ques.UserChoses.toString() == ques.zAnswer){
         isCorect = true;
         number ++;
       }
       else{
         isCorect = false;
       }
-
     }
     else{
       if(data[1][i].question.zQuestionDie != "" ){

@@ -22,7 +22,7 @@ class QuestionModel{
   String zQuestionDie;
   String zAnswerDesc;
   bool IsFinish;
-  List<String> UserChoses;
+  int UserChoses;
   QuestionModel({
     this.zQuestion,
     this.zOption1,
