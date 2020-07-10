@@ -36,6 +36,7 @@ class _CheckAnswerState extends State<CheckAnswer> {
               ? Container()
               : Container(
             height: 200,
+            margin: EdgeInsets.only(bottom: 10.0),
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(
@@ -235,16 +236,16 @@ class _CheckAnswerState extends State<CheckAnswer> {
               children: <Widget>[
                 widget.Answer?.zAnswer == widget.Answer?.UserChoses.toString()?
                 const ListTile(
-                  title:  Text('Kết quả: Đúng ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                  title:  Text('KẾT QUẢ: ĐÚNG ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
                 ):
                 const ListTile(
-                  title:  Text('Kết quả: Sai ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                  title:  Text('KẾT QUẢ: SAI ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
                 ),
                 widget.Answer?.zAnswerDesc != '' ? const ListTile(
                   title: Text('GIẢI THÍCH ĐÁP ÁN:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                 ): Text(''),
                 Container(
-                  padding: const EdgeInsets.only(left: 5.0, right: 10.0, bottom: 5.0, top: 0.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 15.0, top: 0.0),
                   child: Text(widget.Answer?.zAnswerDesc , style: TextStyle(color:Colors.blue, fontSize: 16.0),),
                 )
 

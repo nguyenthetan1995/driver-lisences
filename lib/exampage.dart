@@ -239,7 +239,6 @@ class _CheckQuestionState extends State<CheckQuestion> {
     super.initState();
     bool isfinish = false;
     _subscription= widget.stream.listen((event) {
-
       setState(() {
       });
     });
@@ -257,139 +256,9 @@ class _CheckQuestionState extends State<CheckQuestion> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: new CheckAnswer(Answer:widget.question,index:widget.index)
-      /*Container(
-        child:ListView(
-          children: <Widget>[
-            Container(
-              child: Container(
-                padding: EdgeInsets.all(5),
-                child: Text(
-                  'Câu ${widget.index + 1}: ' + widget.question?.zQuestion ?? '',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            (widget.question.zImageQuestion == '')
-                ? Container()
-                : Container(
-              height: 200,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                          "assets/imageapp/${widget.question.zImageQuestion}"),
-                      fit: BoxFit.contain)),
-            ),
-            Container(
-              child: CheckboxListTile(
-                onChanged: (b) {
-                  onChange(b, widget.question?.zOption1);
-                  (b) ? answers.add('1') : answers.remove('1');
-                  widget.question?.UserChoses = answers;
-                  print(widget.question?.UserChoses);
-                },
-                value: selectedText.contains(widget.question?.zOption1),
-                selected: selectedText.contains(widget.question?.zOption1),
-                title: Text(widget.question?.zOption1),
-                controlAffinity: ListTileControlAffinity.leading,
-              ),
-            ),
-            (widget.question?.zOption3 == null)
-                ? Container()
-                : Container(
-              child: CheckboxListTile(
-                onChanged: (b) {
-                  onChange(b, widget.question?.zOption2);
-                  (b) ? answers.add('2') : answers.remove('2');
-                  widget.question?.UserChoses = answers;
-                  print(widget.question?.UserChoses);
-                },
-                value:  selectedText.contains(widget.question?.zOption2),
-                selected: selectedText.contains(widget.question?.zOption2),
-                title: Text(widget.question?.zOption2),
-                controlAffinity: ListTileControlAffinity.leading,
-              ),
-            ),
-            (widget.question?.zOption3 == null)
-                ? Container()
-                : Container(
-                child: CheckboxListTile(
-                  onChanged: (b) {
-                    onChange(b, widget.question?.zOption3);
-                    (b) ? answers.add('3') : answers.remove('3');
-                    widget.question?.UserChoses = answers;
-                    print(widget.question?.UserChoses);
-                  },
-                  value:  selectedText.contains(widget.question?.zOption3),
-                  selected: selectedText.contains(widget.question?.zOption3),
-                  title: Text(widget.question?.zOption3),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  checkColor: Colors.red
-              ),
-            ),
-            (widget.question?.zOption4 == null || widget.question?.zOption4 == '')
-                ? Container()
-                : Container(
-              child: CheckboxListTile(
-                onChanged: (b) {
-                  onChange(b, widget.question?.zOption4);
-                  (b) ? answers.add('4') : answers.remove('4');
-                  widget.question?.UserChoses = answers;
-                },
-                value: selectedText.contains(widget.question?.zOption4),
-                selected: selectedText.contains(widget.question?.zOption4),
-                title: Text(widget.question?.zOption4),
-                controlAffinity: ListTileControlAffinity.leading,
-              ),
-            ),
-            (widget.question?.IsFinish == false)
-                ? Container()
-                : Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    widget.question?.zAnswer == '1'?
-                    const ListTile(
-                      title:  Text('Kết quả: ' , style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                      subtitle: Text('Đáp án đúng là: A',style: TextStyle(fontSize: 20.0,)),
-                    ):
-                    widget.question?.zAnswer == '2'?
-                    const ListTile(
-                      title:  Text('Kết quả: ' , style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                      subtitle: Text('Đáp án đúng là: B',style: TextStyle(fontSize: 20.0,)),
-                    ):
-                    widget.question?.zAnswer == '3'?
-                    const ListTile(
-                      title:  Text('Kết quả: ' , style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                      subtitle: Text('Đáp án đúng là: C',style: TextStyle(fontSize: 20.0,)),
-                    )
-                    :
-                    const ListTile(
-                      title:  Text('Kết quả: ' , style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                      subtitle: Text('Đáp án đúng là: D',style: TextStyle(fontSize: 20.0,)),
-                    ),
-                    widget.question?.zAnswerDesc != '' ? const ListTile(
-                      title: Text('Giải thích:', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
-                    ): Text(''),
-                   Container(
-                     padding: const EdgeInsets.only(left: 15.0, right: 10.0, bottom: 10.0, top: 0.0),
-                     child: Text(widget.question?.zAnswerDesc , style: TextStyle(color:Colors.blue, fontSize: 20.0),),
-                   )
-
-                  ],
-                ),
-            ),
-          ],
-        ),
-      )*/
     );
   }
-
 }
-
-
 
 void _settingModalBottomSheet(data){
   List<Widget> result = [];
