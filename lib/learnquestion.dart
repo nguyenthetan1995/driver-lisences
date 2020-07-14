@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test_license_driver/model/QuestionModel.dart';
 import 'package:test_license_driver/processdatabase.dart';
@@ -70,93 +71,165 @@ List<Widget> buildListView(List<QuestionModel> list) {
 
 Widget question(QuestionModel question) {
   List<String> answers = (question.zAnswer.split(','));
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: ListView(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(10),
-          child: Text(
-            question.zQuestion,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  return Container (
+    color: Colors.white,
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text(
+              question.zQuestion,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        (question.zImageQuestion == null)
-            ? Container()
-            : Container(
-                height: 200,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                            "assets/imageapp/${question.zImageQuestion}"),
-                        fit: BoxFit.contain)),
-              ),
-        (answers.contains('1'))
-            ? answerRight(question.zOption1)
-            : answerWrong(question.zOption1),
-        (answers.contains('2'))
-            ? answerRight(question.zOption2)
-            : answerWrong(question.zOption2),
-        (question.zOption3 == null)
-            ? Container()
-            : (answers.contains('3'))
-                ? answerRight(question.zOption3)
-                : answerWrong(question.zOption3),
-        (question.zOption4 == null)
-            ? Container()
-            : (answers.contains('4'))
-                ? answerRight(question.zOption4)
-                : answerWrong(question.zOption4),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: (question.zAnswerDesc == null)
+          SizedBox(
+            height: 5,
+          ),
+          (question.zImageQuestion == '')
               ? Container()
-              : Column(
-                  children: <Widget>[
-                    Text(
-                      'Giải thích đáp án',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        question.zAnswerDesc,
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.lightBlue, width: 2),
-                          borderRadius: BorderRadius.all(Radius.circular(8))),
-                    )
-                  ],
+              : Container(
+            height: 200,
+            margin: EdgeInsets.only(bottom: 10.0),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                        "assets/imageapp/${question.zImageQuestion}"),
+                    fit: BoxFit.contain)),
+          ),
+          new Divider(
+            indent: 0.0,
+            color: Colors.grey,
+            height: 0,
+          ),
+          (answers.contains('1'))
+              ? answerRight(question.zOption1,1)
+              : answerWrong(question.zOption1,1),
+          new Divider(
+            indent: 0.0,
+            color: Colors.grey,
+            height: 0,
+          ),
+          (answers.contains('2'))
+              ? answerRight(question.zOption2,2)
+              : answerWrong(question.zOption2,2),
+          new Divider(
+            indent: 0.0,
+            color: Colors.grey,
+            height: 0,
+          ),
+          (question.zOption3 == null || question.zOption3 == '')
+              ? Container()
+              : (answers.contains('3'))
+              ? answerRight(question.zOption3,3)
+              : answerWrong(question.zOption3,3),
+          new Divider(
+            indent: 0.0,
+            color: Colors.grey,
+            height: 0,
+          ),
+          (question.zOption4 == null || question.zOption4 == '')
+              ? Container()
+              : (answers.contains('4'))
+              ? answerRight(question.zOption4,4)
+              : answerWrong(question.zOption4,4),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: (question.zAnswerDesc == '')
+                ? Container()
+                : Column(
+              children: <Widget>[
+                Text(
+                  'Giải thích đáp án',
+                  style:
+                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-        )
-      ],
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    question.zAnswerDesc,
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.lightBlue, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(8))),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
 
-Widget answerWrong(String option) {
-  return Card(
-    elevation: 3,
+Widget answerWrong(String option,int number) {
+  return InkWell (
+    splashColor: Color.fromRGBO(3, 98, 252, 0.2),
     child: Container(
-        padding: EdgeInsets.all(10),
-        child: Text(option, style: TextStyle(fontSize: 15))),
+      padding: const EdgeInsets.only(bottom: 5.0,top: 5),
+      child: Row(
+        children: <Widget>[
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Container(
+                width: 40.0,
+                height: 35,
+                margin: const EdgeInsets.fromLTRB(10.0,0.0,10.0,0.0),
+                decoration: new BoxDecoration(
+                    color:  Colors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.blueAccent)),
+              ),
+              Text(number.toString() ,style: TextStyle(fontWeight: FontWeight.bold)
+
+              )
+            ],
+          ),
+          Expanded(
+              child:  Text(option, style: TextStyle(fontSize: 15))
+          )
+        ],
+      ),
+    ),
   );
 }
 
-Widget answerRight(String option) {
-  return Card(
-    elevation: 3,
+Widget answerRight(String option,int number) {
+  return InkWell (
+    splashColor: Color.fromRGBO(3, 98, 252, 0.2),
     child: Container(
-        padding: EdgeInsets.all(10),
-        child:
-            Text(option, style: TextStyle(fontSize: 15, color: Colors.blue))),
+      padding: const EdgeInsets.only(bottom: 5.0,top: 5),
+      child: Row(
+        children: <Widget>[
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Container(
+                width: 40.0,
+                height: 35,
+                margin: const EdgeInsets.fromLTRB(10.0,0.0,10.0,0.0),
+                decoration: new BoxDecoration(
+                    color:  Colors.blue,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.blueAccent)),
+              ),
+              Text(number.toString() ,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)
+
+              )
+            ],
+          ),
+          Expanded(
+            child:  Text(option, style: TextStyle(fontSize: 15, color: Colors.blue))
+          )
+        ],
+      ),
+    ),
   );
+
 }

@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:test_license_driver/model/TestModel.dart';
 import 'package:countdown_flutter/countdown_flutter.dart';
 import 'model/QuestionModel.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'dart:math' as math;
 import 'CheckAnswers.dart';
-
+import 'Alert.dart';
 class ExamPage extends StatefulWidget {
   ExamPage({this.testModel});
   TestModel testModel;
@@ -45,7 +46,7 @@ class _ExamPageState extends State<ExamPage>
     });
     listQuestionExam = widget.testModel.Questions;
     _controller = TabController(vsync: this, length: listQuestionExam.length);
-    for (var i = 0; i < listQuestionExam.length; i++) {
+    for (var i = 0; i < listQuestionExam.length; i++){
       lstTabs.add(
         Tab(
           child: Row(
@@ -94,12 +95,22 @@ class _ExamPageState extends State<ExamPage>
         appBar: AppBar(
           title: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Đề số 1',
+                  'Đề số ${widget.testModel.number}',
                   style: TextStyle(fontSize: 20.0),
                 ),
+                (listQuestionExam.length !=0)
+                ? (listQuestionExam[_currentIndex].IsFinish != true )?
+                GestureDetector(
+                  child: Text('Kết thúc') ,
+                  onTap: (){
+                    showAlert([context,listQuestionExam,lstQues,_streamController]);
+                  },
+                )
+                :Container()
+              :Container()
               ],
             ),
           ),
@@ -114,34 +125,67 @@ class _ExamPageState extends State<ExamPage>
           child: Row(
             children: <Widget>[
               Container(
-                  child: Center(
-                child: IconButton(
-                  tooltip: 'Quay lại',
-                  icon: const Icon(
-                    Icons.chevron_left,
-                    color: Colors.white,
-                    size: 45.0,
-                  ),
-                  onPressed: () {
-                    _nextPage(-1);
-                  },
-                ),
-              )),
-              Expanded(
                 child: Center(
-                  child: CountdownFormatted(
-                    duration: Duration(minutes: 22),
-                    builder: (BuildContext ctx, String remaining) {
-                      return Text(
-                        remaining,
-                        style: TextStyle(fontSize: 30, color: Colors.white),
-                      ); // 01:00:00
+                  child: IconButton(
+                    tooltip: 'Quay lại',
+                    icon: const Icon(
+                      Icons.chevron_left,
+                      color: Colors.white,
+                      size: 45.0,
+                    ),
+                    onPressed: () {
+                      _nextPage(-1);
                     },
                   ),
+                )
+              ),
+              Expanded(
+                child: Center(
+                  child:(listQuestionExam.length !=0) ?
+                  listQuestionExam[_controller.index].IsFinish != true
+                  ? Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image(image: AssetImage('assets/icon/clock.png'), height: 40,width: 40,)
+                        ,
+                        CountdownFormatted(
+                          duration: Duration(minutes: 22),
+                          builder: (BuildContext ctx, String remaining) {
+                            return Text(
+                              remaining,
+                              style: TextStyle(fontSize: 30, color: Colors.white),
+                            ); // 01:00:00
+                          },
+                        )],
+                    )
+                  )
+                  :IconButton(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    icon: const Icon(
+                      Icons.assignment,
+                      color: Colors.white,
+                      size: 45.0,
+                    ),
+                    tooltip: 'Kết quả',
+                    onPressed: () {
+                      for(var i = 0; i <=listQuestionExam.length-1 ; i++){
+                        listQuestionExam[i].IsFinish = true;
+                      }
+                      _streamController.add(<String>[
+                        "34",
+                        "babcbcb"
+                      ]);
+                      _settingModalBottomSheet([context,lstQues]);
+                    },
+                  )
+                  :Container()
                 ),
               ),
-              Container(
-                  child: _controller.index != (lstTabs.length - 1)
+              listQuestionExam.length!=0?
+              (listQuestionExam[_controller.index].IsFinish == false)
+                ? Container(
+                    child: (_controller.index != (lstTabs.length - 1))
                       ? IconButton(
                           icon: const Icon(
                             Icons.chevron_right,
@@ -165,22 +209,6 @@ class _ExamPageState extends State<ExamPage>
                           onPressed: () {
                             /*widget._stream.add(newdata)*/
                             for(var i = 0; i <=listQuestionExam.length-1 ; i++){
-                              /*if(listQuestionExam[i].UserChoses!=null && listQuestionExam[i].UserChoses.length > 0 ){
-                                for(var index =0 ; index <= listQuestionExam[i].UserChoses.length; index ++){
-                                  if(listQuestionExam[i].UserChoses[index] == '1'){
-                                    listQuestionExam[i].Option1 = true;
-                                  }
-                                  if(listQuestionExam[i].UserChoses[index] == '2'){
-                                    listQuestionExam[i].Option2 = true;
-                                  }
-                                  if(listQuestionExam[i].UserChoses[index] == '3'){
-                                    listQuestionExam[i].Option3 = true;
-                                  }
-                                  if(listQuestionExam[i].UserChoses[index] == '4'){
-                                    listQuestionExam[i].Option4 = true;
-                                  }
-                                }
-                              }*/
                               listQuestionExam[i].IsFinish = true;
                             }
                             _streamController.add(<String>[
@@ -195,7 +223,26 @@ class _ExamPageState extends State<ExamPage>
                             });*/
                             _settingModalBottomSheet([context,lstQues]);
                           },
-                        ))
+                        )
+                )
+                :  Container(
+                  child: (_controller.index != (lstTabs.length - 1))
+                    ? IconButton(
+                      icon: const Icon(
+                        Icons.chevron_right,
+                        color: Colors.white,
+                        size: 45.0,
+                      ),
+                      tooltip: 'Câu kế tiếp',
+                      onPressed: () {
+                        _nextPage(1);
+
+                      },
+                    )
+                    : Container()
+
+              )
+              : Container()
             ],
           ),
         ),
@@ -259,8 +306,43 @@ class _CheckQuestionState extends State<CheckQuestion> {
     );
   }
 }
-
+showAlert(data) {
+  showDialog(
+    context: data[0],
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('KẾT THÚC.'),
+        content: Text("Bạn có chắc chắn kết thúc bài thi?"),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Đồng ý"),
+            onPressed: () {
+              for(var i = 0; i <=data[1].length-1 ; i++){
+                data[1][i].IsFinish = true;
+              }
+              data[3].add(<String>[
+                "34",
+                "babcbcb"
+              ]);
+              Navigator.of(context).pop();
+              _settingModalBottomSheet([data[0],data[2]]);
+              setState(){}
+            },
+          ),
+          FlatButton(
+            child: Text("Hủy"),
+            onPressed: () {
+              //Put your code here which you want to execute on No button click.
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 void _settingModalBottomSheet(data){
+
   List<Widget> result = [];
   var number = 0;
   var ispass = false;
@@ -285,8 +367,8 @@ void _settingModalBottomSheet(data){
     }
     result.add(
         Container(
-            width: 40.0,
-            height: 30.0,
+            width: 50.0,
+            height: 50.0,
             padding: const EdgeInsets.all(5.0),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -303,10 +385,19 @@ void _settingModalBottomSheet(data){
             ),
             child: new Column(
                  children: <Widget>[
-                   Text('Câu ' + (i+ 1).toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),),
-                   Expanded(
+                   Flexible(
+                     flex: 1,
+                     child:
+                     Text((i+ 1).toString(), style: TextStyle(fontWeight: FontWeight.bold),)
+                   ),
+                   Flexible(flex: 1,
                      child: Center(
-                       child:isCorect == true ? Icon(Icons.check_circle, color: Colors.blue,size: 30.0,) : Icon(Icons.cancel,color: Colors.red,size: 30.0)
+                       child:Container(
+                         margin: EdgeInsets.only(top: 5.0),
+                         child: isCorect == true ?
+                         Icon(Icons.check_circle, color: Colors.blue,size: 20.0,) :
+                         Icon(Icons.cancel,color: Colors.red,size: 20.0),
+                       )
                      ),
                    ),
                  ],
@@ -319,7 +410,6 @@ void _settingModalBottomSheet(data){
     ispass = true;
   }
   showModalBottomSheet(
-
       context: data[0],
       builder: (BuildContext bc){
         return Container(
@@ -329,14 +419,31 @@ void _settingModalBottomSheet(data){
             children: <Widget>[
               Container(
                 height: 80.0,
+                padding: EdgeInsets.only(top: 10),
+                margin: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                      bottomLeft: Radius.circular(10.0),
+                      bottomRight: Radius.circular(10.0)
+                  ),
+                  border: Border.all(
+                      width: 2.0,
+                      color: Colors.black12
+                  ),
+                ),
                 child: Column(
                   children: <Widget>[
                     Center(
-                      child: ispass == true ?
-                      Text('Chúc mừng bạn đã thi đậu!',style: TextStyle(color: Colors.white, fontSize: 30.0),)
-                          : Text('Bạn chưa đậu!',style: TextStyle(color: Colors.white, fontSize: 30.0)),
+                      child: Container(
+                        child:  ispass == true ?
+                        Text('BẠN ĐÃ ĐẬU!',style: TextStyle(color: Colors.blue, fontSize: 20.0,fontWeight: FontWeight.bold),)
+                        : Text('BẠN ĐÃ TRƯỢT!',style: TextStyle(color: Colors.blue, fontSize: 20.0,fontWeight: FontWeight.bold)),
+                      )
                     ) ,
-                    Text(number.toString()+'/35',style: TextStyle(color: Colors.white, fontSize: 30.0)
+                    Text(number.toString()+'/35',style: TextStyle(color: Colors.blue, fontSize: 20.0,fontWeight: FontWeight.bold)
                     ),
                   ],
                 )

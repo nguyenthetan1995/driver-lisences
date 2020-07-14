@@ -4,6 +4,8 @@ import 'package:test_license_driver/exams.dart';
 import 'package:test_license_driver/learnpage.dart';
 import 'package:test_license_driver/signpage.dart';
 import 'package:test_license_driver/time.dart';
+import 'examsramdom.dart';
+import 'QuestionWrong.dart';
 import 'package:image_auto_slider/image_auto_slider.dart';
 
 
@@ -93,9 +95,28 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     options.clear();
-    options.add(
-        Stack(
-        alignment: new Alignment(0.0, 0.9),
+
+    options.add(Container(
+      width: 150.0,
+      height: 150.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12.withOpacity(0.4),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(6.0, 6.0), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
         children: <Widget>[
           GestureDetector(
             onTap: (){
@@ -104,283 +125,273 @@ class _MyHomePageState extends State<MyHomePage> {
               }));
             },
             child: new Container(
-              width: 150.0,
-              height: 150.0,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12.withOpacity(0.4),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: Offset(6.0, 6.0),// changes position of shadow
-                  ),
-                ],
-              ),
-                child: new Container(
-                    padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
-                    child: new Image.asset('assets/imghome/book.png',fit: BoxFit.fill,)
+                child:  Container(
+                    padding: EdgeInsets.only(top:10.0, bottom: 5.0),
+                    height: 70,
+                    width: 150,
+                    child:new Image.asset('assets/imghome/book.png',fit: BoxFit.contain,)
                 )
             ),
           ),
           //Container(height: 30,color: Colors.blue,),
-
-          new Container(
-            padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 7.0),
-            decoration: new BoxDecoration(
-
+          Expanded(
+            child:new Container(
+                padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                child:Center(
+                    child: new Text('Học lý thuyết', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                )
+            )
+          )
+        ],
+      ),
+    ));
+    options.add(Container(
+      width: 150.0,
+      height: 150.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12.withOpacity(0.4),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(6.0, 6.0), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        children: <Widget>[
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ListExamPage1();
+              }));
+            },
+            child: new Container(
+                child:  Container(
+                    padding: EdgeInsets.only(top:10.0, bottom: 5.0),
+                    height: 70,
+                    width: 150,
+                    child:new Image.asset('assets/imghome/book_2.png',fit: BoxFit.contain,)
+                )
             ),
-            child: new Text('Học lý thuyết', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+          ),
+          //Container(height: 30,color: Colors.blue,),
+          Expanded(
+            child:new Container(
+              padding: EdgeInsets.only(left: 5.0, right: 5.0),
+              child:Center(
+                  child: new Text('Thi theo bộ đề', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+              )
+            )
+          )
+        ],
+      ),
+    ));
+    options.add(Container(
+      width: 150.0,
+      height: 150.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12.withOpacity(0.4),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(6.0, 6.0), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        children: <Widget>[
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SignPage();
+              }));
+            },
+            child: new Container(
+                child:  Container(
+                    padding: EdgeInsets.only(top:10.0, bottom: 5.0),
+                    height: 70,
+                    width: 150,
+                    child:new Image.asset('assets/imghome/traffic_sign.png',fit: BoxFit.contain,)
+                )
+            ),
+          ),
+          //Container(height: 30,color: Colors.blue,),
+          Expanded(
+            child:new Container(
+                padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                child:Center(
+                    child: new Text('Biển báo giao thông', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                )
+            )
           )
 
-        ]
+        ],
+      ),
     ));
-    options.add(
-        Stack(
-            alignment: new Alignment(0.0, 0.9),
-            children: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ListExamPage1();
-                  }));
-                },
-                child: new Container(
-                  width: 150.0,
-                  height: 150.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12.withOpacity(0.4),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: Offset(6.0, 6.0), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                    child: new Container(
-                        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/imghome/book_2.png',fit: BoxFit.fill,)
-                    )
-                ),
-              ),
-              //Container(height: 30,color: Colors.blue,),
-
-              new Container(
-                padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 7.0),
-                decoration: new BoxDecoration(
-
-                ),
-                child: new Text('Thi theo bộ đề', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-              )
-
-            ]
+    options.add(Container(
+      width: 150.0,
+      height: 150.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12.withOpacity(0.4),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(6.0, 6.0), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        children: <Widget>[
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return Examsramdom();
+              }));
+            },
+            child: new Container(
+                child:  Container(
+                    padding: EdgeInsets.only(top:10.0, bottom: 5.0),
+                    height: 70,
+                    width: 150,
+                    child:new Image.asset('assets/imghome/random.png',fit: BoxFit.contain,)
+                )
+            ),
+          ),
+          //Container(height: 30,color: Colors.blue,),
+          Expanded(
+            child:new Container(
+                padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                child:Center(
+                    child: new Text('Đề thi ngẫu nhiên', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                )
+            )
+          )
+        ],
+      ),
     ));
-
-    options.add(
-        Stack(
-            alignment: new Alignment(0.0, 0.9),
-            children: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return SignPage();
-                  }));
-                },
-                child: new Container(
-                  width: 150.0,
-                  height: 150.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12.withOpacity(0.4),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: Offset(6.0, 6.0), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                    child: new Container(
-                        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/imghome/traffic_sign.png',fit: BoxFit.fill,)
-                    )
-                ),
-              ),
-              //Container(height: 30,color: Colors.blue,),
-
-              new Container(
-                padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 3.0),
-                decoration: new BoxDecoration(
-
-                ),
-                child: new Text('Biển báo giao thông', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-              )
-
-            ]
+    options.add(Container(
+      width: 150.0,
+      height: 150.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12.withOpacity(0.4),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(6.0, 6.0), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        children: <Widget>[
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SignPage();
+              }));
+            },
+            child: new Container(
+                child:  Container(
+                    padding: EdgeInsets.only(top:10.0, bottom: 5.0),
+                    height: 70,
+                    width: 150,
+                    child:new Image.asset('assets/imghome/light.png',fit: BoxFit.contain,)
+                )
+            ),
+          ),
+          //Container(height: 30,color: Colors.blue,),
+          Expanded(
+            child:new Container(
+                padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                child:Center(
+                    child: new Text('Mẹo thi kết quả cao', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                )
+            )
+          )
+        ],
+      ),
     ));
-    options.add(
-        Stack(
-            alignment: new Alignment(0.0, 0.9),
-            children: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CountDownTime();
-                  }));
-                },
-                child: new Container(
-                  width: 150.0,
-                  height: 150.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12.withOpacity(0.4),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: Offset(6.0, 6.0), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                    child: new Container(
-                        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 49.0, top:14.0),
-                        child: new Image.asset('assets/imghome/random.png',fit: BoxFit.fill,)
-                    )
-                ),
-              ),
-              //Container(height: 30,color: Colors.blue,),
-
-              new Container(
-                padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 3.0),
-                decoration: new BoxDecoration(
-
-                ),
-                child: new Text('Đề thi ngẫu nhiên', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-              )
-
-            ]
-    ));
-    options.add(
-        Stack(
-            alignment: new Alignment(0.0, 0.9),
-            children: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return SignPage();
-                  }));
-                },
-                child: new Container(
-                  width: 150.0,
-                  height: 150.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12.withOpacity(0.4),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: Offset(6.0, 6.0),// changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: new Container(
-                    padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 42.0, top:12.0),
-                    child: new Image.asset('assets/imghome/light.png',fit: BoxFit.fill,)
+    options.add(Container(
+      width: 150.0,
+      height: 150.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12.withOpacity(0.4),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(6.0, 6.0), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        children: <Widget>[
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return QuestionWrong();
+              }));
+            },
+            child: new Container(
+                child:  Container(
+                    padding: EdgeInsets.only(top:10.0, bottom: 5.0),
+                    height: 70,
+                    width: 150,
+                    child:new Image.asset('assets/imghome/wrong.png',fit: BoxFit.contain,)
+                )
+            ),
+          ),
+          //Container(height: 30,color: Colors.blue,),
+          Expanded(
+              child:new Container(
+                  padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                  child:Center(
+                      child: new Text('Câu hay sai', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
                   )
-                ),
-              ),
-              //Container(height: 30,color: Colors.blue,),
-
-              new Container(
-                padding: const EdgeInsets.only(left: 10.0,right: 10.0, ),
-                decoration: new BoxDecoration(
-                ),
-                child: new Text('Mẹo thi kết quả cao', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
               )
-
-            ]
+          )
+        ],
+      ),
     ));
-    options.add(
-        Stack(
-            alignment: new Alignment(0.0, 0.9),
-            children: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return SignPage();
-                  }));
-                },
-                child: new Container(
-                  width: 150.0,
-                  height: 150.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12.withOpacity(0.4),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: Offset(6.0, 6.0), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                    child: new Container(
-                        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 47.0, top:12.0),
-                        child: new Image.asset('assets/imghome/search.png',fit: BoxFit.fill,)
-                    )
-                ),
-              ),
-              //Container(height: 30,color: Colors.blue,),
 
-              new Container(
-                padding: const EdgeInsets.only(left: 10.0,right: 10.0, bottom: 3.0),
-                decoration: new BoxDecoration(
-
-                ),
-                child: new Text('Tra cứu luật nhanh', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-              )
-
-            ]
-    ));
 
     return Scaffold(
       appBar: AppBar(

@@ -43,7 +43,7 @@ class _CheckAnswerState extends State<CheckAnswer> {
                         "assets/imageapp/${widget.Answer.zImageQuestion}"),
                     fit: BoxFit.contain)),
           ),
-          (widget.Answer?.zOption1 == null)
+          (widget.Answer?.zOption1 == null || widget.Answer?.zOption1 == '')
               ? Container()
               : InkWell (
                   splashColor: Color.fromRGBO(3, 98, 252, 0.2),
@@ -98,7 +98,7 @@ class _CheckAnswerState extends State<CheckAnswer> {
             color: Colors.grey,
             height: 0,
           ),
-          (widget.Answer?.zOption2 == null)
+          (widget.Answer?.zOption2 == null || widget.Answer?.zOption2 == '')
               ? Container()
               : InkWell(
                   splashColor: Color.fromRGBO(3, 98, 252, 0.2),
@@ -143,7 +143,7 @@ class _CheckAnswerState extends State<CheckAnswer> {
             color: Colors.grey,
             height: 0,
           ),
-          (widget.Answer?.zOption3 == null)
+          (widget.Answer?.zOption3 == null || widget.Answer?.zOption3 == '')
               ? Container()
               : InkWell(
                   splashColor: Color.fromRGBO(3, 98, 252, 0.2),
@@ -235,11 +235,15 @@ class _CheckAnswerState extends State<CheckAnswer> {
 
               children: <Widget>[
                 widget.Answer?.zAnswer == widget.Answer?.UserChoses.toString()?
-                const ListTile(
-                  title:  Text('KẾT QUẢ: ĐÚNG ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-                ):
-                const ListTile(
-                  title:  Text('KẾT QUẢ: SAI ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                Container(
+                  padding: const EdgeInsets.only(left: 20.0, top: 10),
+                  alignment:  Alignment.centerLeft,
+                  child: Text('KẾT QUẢ: ĐÚNG ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                )
+                : Container(
+                  padding: const EdgeInsets.only(left: 20.0, top: 10),
+                  alignment: Alignment.centerLeft,
+                  child: Text('KẾT QUẢ: SAI ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))
                 ),
                 widget.Answer?.zAnswerDesc != '' ? const ListTile(
                   title: Text('GIẢI THÍCH ĐÁP ÁN:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),

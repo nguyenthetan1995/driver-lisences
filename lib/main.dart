@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+/*import 'package:simple_permissions/simple_permissions.dart';*/
 import 'package:flutter/material.dart';
 import 'package:test_license_driver/processdatabase.dart';
 import 'homepage.dart';
@@ -12,12 +12,15 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class  _MyAppState extends State<MyApp> {
   @override
-  void setState(fn) {
+  setState(fn) async*{
     // TODO: implement setState
     super.setState(fn);
-
+    /*PermissionStatus permissionResult = await SimplePermissions.requestPermission(Permission. WriteExternalStorage);
+    if (permissionResult == PermissionStatus.authorized){
+      initializeDatabase();
+    }*/
     /*final res =SimplePermissions.requestPermission(widget.permission).then((value) {
       log('checkPermistion');
       print(value);

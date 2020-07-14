@@ -12,18 +12,17 @@ import 'model/QuestionModel.dart';
 import 'model/TestModel.dart';
 import 'dart:convert';
 
-class ListExamPage1 extends StatefulWidget {
+class Examsramdom extends StatefulWidget {
   @override
   _ListExamPage1State createState() => _ListExamPage1State();
 }
 
-class _ListExamPage1State extends State<ListExamPage1> {
+class _ListExamPage1State extends State<Examsramdom> {
   List<Widget> exams = [];
   String status = 'Làm bài';
   List<TestModel> testData = List<TestModel>();
   @override
   void initState() {
-
     super.initState();
     InitDataTest().then((v){
       setState(() {
@@ -40,15 +39,14 @@ class _ListExamPage1State extends State<ListExamPage1> {
     {
       // TODO: Check List Test
       // TODO: Create List Test and save
-      for (var i=0;i<20;i++)
-      {
-        var questions= await RamdomTestData();
 
-        var testModel=new TestModel(
-          id: i+1,number: i+1,Questions: questions,status: "Lam bai",
-        );
-        result.add(testModel);
-      }
+      var questions= await RamdomTestData();
+
+      var testModel=new TestModel(
+        id: 1,number: 1,Questions: questions,status: "Lam bai",
+      );
+      result.add(testModel);
+
       var jsondata=result.map((f)=>f.toJson()).toList();
       prefs.setString('testData', json.encode(jsondata as List<Map>));
     }
@@ -79,6 +77,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
 
 
     if(Isconnect == false){
+
       await initializeDatabase().then((v) async {
         listModelQuestion = await getAllListQuestion(v);
         Isconnect = true;
@@ -262,6 +261,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
       var test=testData[i];
       exams.add(
         Container(
+          
           padding: const EdgeInsets.all(0.0),
           margin: const EdgeInsets.only(left: 5.0, right: 5.0),
           child: GestureDetector(
@@ -311,7 +311,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
                           child:Stack(
                             children: <Widget>[
                               Container(
-                                child:Text('${test.number}', style: TextStyle(color: Colors.blue,fontFamily: 'city_boy', fontSize: 34.0),textAlign: TextAlign.center,),
+                                child: Icon(Icons.play_arrow, color: Colors.blue, size: 35.0,),
                                 padding: EdgeInsets.only(bottom: 2.0, right: 8.0),
                                 alignment: Alignment.center,
                               ),
@@ -330,7 +330,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Đề số ${test.number} (35 câu)',
+                        'Đề thi ngẫu nhiên (35 câu)',
                         style: TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold,),
                       ),
@@ -358,7 +358,7 @@ class _ListExamPage1State extends State<ListExamPage1> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Thi sát hạch'),
+        title: Text('Thi ngẫu nhiên'),
       ),
       body: Container(
         color: Colors.black12.withOpacity(0.1),

@@ -16,7 +16,7 @@ class QuestionTypeModel {
     return QuestionTypeModel(
       zTypeQuestion: json["ZTYPE_NAME"],
       zTypeQuestionDesc: json["ZDESC"],
-      zImage: json["ZIMAGE"],
+      zImage: json["ZID"],
       zIndex: json["Z_PK"],
     );
   }

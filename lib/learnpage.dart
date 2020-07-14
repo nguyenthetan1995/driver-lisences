@@ -33,10 +33,14 @@ class _LearningPageState extends State<LearningPage> {
         appBar: AppBar(
           title: Text('Học lý thuyết'),
         ),
-        body: ListView(
-        children:
-        this.listQuestionType.map((f) => questionType(f,context)).toList(),
-    ));
+        body:Container(
+          color: Colors.black12.withOpacity(0.1),
+          child: new ListView(
+            children:
+            this.listQuestionType.map((f) => questionType(f,context)).toList(),
+          )
+        ),
+    );
   }
 }
 
@@ -47,26 +51,43 @@ Widget questionType(QuestionTypeModel question, BuildContext context) {
         return Questions(question);
       }));
     },
-    child: Card(
-      elevation: 3,
+    child: Container(
+      /*elevation: 3,*/
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        gradient: LinearGradient(
+          // Where the linear gradient begins and ends
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          // Add one stop for each color. Stops should increase from 0 to 1
+          stops: [0.9, 0.9],
+          colors: [
+            // Colors are easy thanks to Flutter's Colors class.
+            Colors.white,
+            Colors.white
+          ],
+        ),
+      ),
+      margin: const EdgeInsets.all(5.0),
+      width: MediaQuery.of(context).size.width,
+      height: 90,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(50),
-              height: 70,
+              height: 60,
               width: 70,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage("assets/icon/${question.zImage}"),
+                  image: AssetImage("assets/icon/${question.zImage}.png"),
               )),
             ),
             Flexible(
               child: Container(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0, right: 10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -79,7 +100,7 @@ Widget questionType(QuestionTypeModel question, BuildContext context) {
                     ),
                     Text(
                       question.zTypeQuestionDesc,
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 15, color: Colors.black54),
                     )
                   ],
                 ),

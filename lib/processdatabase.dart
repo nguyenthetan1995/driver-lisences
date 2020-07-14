@@ -8,7 +8,7 @@ import 'model/SignModel.dart';
 
 Future<Database> initializeDatabase() async {
   var path = await getDatabasesPath();
-  var dbPath = (path + '/' + 'data11.sqlite');
+  var dbPath = (path + '/' + 'data12.sqlite');
 
   if (FileSystemEntity.typeSync(dbPath) == FileSystemEntityType.notFound) {
     ByteData data = await rootBundle.load("assets/databases/data.sqlite");
@@ -68,8 +68,15 @@ Future<List<QuestionTypeModel>> getListQuestionType(
 Future<List<QuestionModel>> getListQuestion(
     Database departuresDatabase, int typeQuestion) async {
   var listQuestion = new List<QuestionModel>();
-  List questions = await departuresDatabase
-      .rawQuery("SELECT * FROM ZQUESTION WHERE ZQUESTIONTYPE = $typeQuestion");
+  List questions = new  List<QuestionModel>();
+  if(typeQuestion == 8){
+    questions = await departuresDatabase
+        .rawQuery("SELECT * FROM ZQUESTION WHERE ZQUESTIONDIE = 1");
+  }
+  else {
+    questions = await departuresDatabase
+        .rawQuery("SELECT * FROM ZQUESTION WHERE ZQUESTIONTYPE = $typeQuestion");
+  }
   for (var question in questions) {
     listQuestion.add(QuestionModel.fromJson(question));
   }
@@ -90,6 +97,43 @@ Future<List<QuestionModel>> getAllListQuestion(
     print('never reached');
   }
 
+
+  return (listQuestion);
+}
+Future<List<QuestionModel>> WriteQuestionWrong(
+    Database departuresDatabase,int IdQuestion) async {
+  var listQuestion = new List<QuestionModel>();
+  bool OK = false;
+  try {
+    dynamic questions = await departuresDatabase
+        .rawQuery("UPDATE ZQUESTION SET ZWRONG = ZWRONG + 1 WHERE Z_PK = $IdQuestion");
+    OK = true;
+    /*for (var question in questions) {
+      listQuestion.add(QuestionModel.fromJson(question));
+    }*/
+  } on Exception catch (_) {
+    print(_);
+    OK = false;
+    print('never reached');
+  }
+
+  return (listQuestion);
+}
+Future<List<QuestionModel>> GetQuestionWrong(
+    Database departuresDatabase) async {
+  var listQuestion = new List<QuestionModel>();
+  bool OK = false;
+  try {
+    dynamic questions = await departuresDatabase
+        .rawQuery("SELECT * FROM ZQUESTION WHERE ZWRONG > 0");
+    for (var question in questions) {
+      listQuestion.add(QuestionModel.fromJson(question));
+    }
+  } on Exception catch (_) {
+    print(_);
+    OK = false;
+    print('never reached');
+  }
 
   return (listQuestion);
 }

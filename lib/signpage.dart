@@ -95,13 +95,11 @@ class _SignPageState extends State<SignPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(5),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage("assets/imagesign/${sign.zImageSign}"),fit: BoxFit.contain
-            )),
+            padding: EdgeInsets.all(5.0),
+            height: 90,
+            width: 90,
+            child: Image(image: AssetImage("assets/imagesign/${sign.zImageSign}"))
+
           ),
           Flexible(
             child: Container(
