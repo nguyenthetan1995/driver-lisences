@@ -19,6 +19,11 @@ class QuestionWrong extends StatefulWidget {
 
 class _ListExamPage1State extends State<QuestionWrong> {
   List<Widget> exams = [];
+  QuestionModel question;
+  List<Widget> lstTabs = [];
+  List<Widget> bodyTabs = new List();
+  TabController _controller;
+  List<QuestionModel> listQuestionExam = [];
   String status = 'Làm bài';
   List<TestModel> testData = List<TestModel>();
   @override
@@ -62,17 +67,7 @@ class _ListExamPage1State extends State<QuestionWrong> {
   {
     bool Isconnect = false;
     List<QuestionModel> listModelQuestion = [];
-    List<QuestionModel> listModelQuestion11 = [];
-    List<QuestionModel> listModelQuestion121 = [];
-    List<QuestionModel> listModelQuestion122 = [];
-    List<QuestionModel> listModelQuestion13 = [];
-    List<QuestionModel> listModelQuestion14 = [];
-    List<QuestionModel> listModelQuestion2 = [];
-    List<QuestionModel> listModelQuestion3 = [];
-    List<QuestionModel> listModelQuestion4 = [];
-    List<QuestionModel> listModelQuestion5 = [];
-    List<QuestionModel> listModelQuestion6 = [];
-    List<QuestionModel> listModelQuestion7 = [];
+
     List<QuestionModel> listQuestionExam = List<QuestionModel>();
 
 
@@ -87,62 +82,175 @@ class _ListExamPage1State extends State<QuestionWrong> {
     if (listModelQuestion.length != 0) {
       listQuestionExam = listModelQuestion;
     }
-    print(listQuestionExam);
     return listQuestionExam;
 
   }
+
   @override
   Widget build(BuildContext context) {
-    QuestionModel question;
-    List<Widget> lstTabs = [];
-    List<Widget> lstQues = [];
-    TabController _controller;
-    List<QuestionModel> listQuestionExam = [];
-    if(testData.length==0)
-    {
-      return Container(
-        color: Colors.white,
-        child: Center(
-          child: CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-          ),
-        ),
-      );
-    }
 
+    lstTabs.clear();
+    bodyTabs.clear();
     for (int i = 0; i <testData.length; i ++){
       listQuestionExam=testData[i].Questions;
-      for(int index = 0; i <listQuestionExam.length; index ++){
-
+      if (listQuestionExam.length != 0) {
+        for(int index = 0; index <listQuestionExam.length; index ++){
+          lstTabs.add(Tab(text: 'Câu ${index +1}'));
+          bodyTabs.add(
+            Container(
+              padding: EdgeInsets.all(10.0),
+              child: ListView(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(bottom: 20.0),
+                      child: Text(
+                        'Câu ${index + 1}: ' + listQuestionExam[index].zQuestion ?? '',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    (listQuestionExam[index].zImageQuestion == '')
+                        ? Container()
+                        : Container(
+                      height: 200,
+                      margin: EdgeInsets.only(bottom: 10.0),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                  "assets/imageapp/${listQuestionExam[index].zImageQuestion}"),
+                              fit: BoxFit.contain)),
+                    ),
+                    new Divider(
+                      indent: 0.0,
+                      color: Colors.grey,
+                      height: 0,
+                    ),
+                    (listQuestionExam[index].zAnswer == '1')
+                        ? answerRight(listQuestionExam[index].zOption1,1)
+                        : answerWrong(listQuestionExam[index].zOption1,1),
+                    new Divider(
+                      indent: 0.0,
+                      color: Colors.grey,
+                      height: 0,
+                    ),
+                    (listQuestionExam[index].zAnswer == '2')
+                        ? answerRight(listQuestionExam[index].zOption2,2)
+                        : answerWrong(listQuestionExam[index].zOption2,2),
+                    new Divider(
+                      indent: 0.0,
+                      color: Colors.grey,
+                      height: 0,
+                    ),
+                    (listQuestionExam[index].zOption3 == null || listQuestionExam[index].zOption3 == '')
+                        ? Container()
+                        : (listQuestionExam[index].zAnswer == '1')
+                        ? answerRight(listQuestionExam[index].zOption3,3)
+                        : answerWrong(listQuestionExam[index].zOption3,3),
+                    new Divider(
+                      indent: 0.0,
+                      color: Colors.grey,
+                      height: 0,
+                    ),
+                    (listQuestionExam[index].zOption4 == null || listQuestionExam[index].zOption4 == '')
+                        ? Container()
+                        : (listQuestionExam[index].zAnswer == '4')
+                        ? answerRight(listQuestionExam[index].zOption4,4)
+                        : answerWrong(listQuestionExam[index].zOption4,4),
+                  ]
+              )
+            )
+          );
+        }
       }
-
-      _controller = TabController(length: listQuestionExam.length,);
-      lstTabs.add(
-        Tab(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Câu ${i + 1}/35',
-                style: TextStyle(fontSize: 18),
+    }
+    return lstTabs.length ==0 ? Container()
+        :DefaultTabController(
+        length: lstTabs.length,
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'Câu hay sai',
+                style: TextStyle(fontSize: 20.0),
               ),
+              bottom:PreferredSize(
+                  child: TabBar(
+                      isScrollable: true,
+                      unselectedLabelColor: Colors.white.withOpacity(0.5),
+                      indicatorColor: Colors.white,
+                      tabs: lstTabs),
+                  preferredSize: Size.fromHeight(40.0)
+              ),
+            ),
+            body: TabBarView(children: bodyTabs))
+      );
+    }
+  }
+
+Widget answerWrong(String option,int number) {
+  return InkWell (
+    splashColor: Color.fromRGBO(3, 98, 252, 0.2),
+    child: Container(
+      padding: const EdgeInsets.only(bottom: 5.0,top: 5),
+      child: Row(
+        children: <Widget>[
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Container(
+                width: 40.0,
+                height: 35,
+                margin: const EdgeInsets.fromLTRB(10.0,0.0,10.0,0.0),
+                decoration: new BoxDecoration(
+                    color:  Colors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.blueAccent)),
+              ),
+              Text(number.toString() ,style: TextStyle(fontWeight: FontWeight.bold)
+
+              )
             ],
           ),
-        ),
-      );
-
-
-    }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Câu hay sai'),
+          Expanded(
+              child:  Text(option, style: TextStyle(fontSize: 15))
+          )
+        ],
       ),
-      body: Container(
-        color: Colors.black12.withOpacity(0.1),
-        child: new ListView(
-          children: exams
-        ),
-      )
-    );
-  }
+    ),
+  );
+}
+
+Widget answerRight(String option,int number) {
+  return InkWell (
+    splashColor: Color.fromRGBO(3, 98, 252, 0.2),
+    child: Container(
+      padding: const EdgeInsets.only(bottom: 5.0,top: 5),
+      child: Row(
+        children: <Widget>[
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Container(
+                width: 40.0,
+                height: 35,
+                margin: const EdgeInsets.fromLTRB(10.0,0.0,10.0,0.0),
+                decoration: new BoxDecoration(
+                    color:  Colors.blue,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.blueAccent)),
+              ),
+              Text(number.toString() ,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)
+
+              )
+            ],
+          ),
+          Expanded(
+              child:  Text(option, style: TextStyle(fontSize: 15, color: Colors.blue))
+          )
+        ],
+      ),
+    ),
+  );
+
 }

@@ -78,7 +78,7 @@ class _ExamPageState extends State<ExamPage>
   }
 
   int _currentIndex = 0;
-  void _handleTabSelection() {
+  void _handleTabSelection(){
     setState(() {
       _currentIndex = _controller.index;
     });
