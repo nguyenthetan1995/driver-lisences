@@ -5,6 +5,7 @@ import 'package:test_license_driver/model/SignTypeModel.dart';
 import 'model/QuestionModel.dart';
 import 'model/QuestionTypeModel.dart';
 import 'model/SignModel.dart';
+import 'model/QuickleanModel.dart';
 
 Future<Database> initializeDatabase() async {
   var path = await getDatabasesPath();
@@ -18,8 +19,8 @@ Future<Database> initializeDatabase() async {
     print('Database is ready!!');
     print(FileSystemEntity.typeSync(dbPath));
   }
-  var departuresDatabase = await openDatabase(dbPath);
 
+  var departuresDatabase = await openDatabase(dbPath);
   print(departuresDatabase.isOpen);
   print(departuresDatabase.path);
   return departuresDatabase;
@@ -100,20 +101,36 @@ Future<List<QuestionModel>> getAllListQuestion(
 
   return (listQuestion);
 }
+Future<List<QicklearnModel>> getAllListQicklearn(
+    Database departuresDatabase) async {
+  var ListQicklearn = new List<QicklearnModel>();
+  try {
+    dynamic questions = await departuresDatabase
+        .rawQuery("SELECT * FROM ZTIP");
+    for (var question in questions) {
+
+      ListQicklearn.add(QicklearnModel.fromJson(question));
+    }
+  } on Exception catch (_) {
+    print(_);
+    print('never reached');
+  }
+
+
+  return (ListQicklearn);
+}
 Future<List<QuestionModel>> WriteQuestionWrong(
     Database departuresDatabase,int IdQuestion) async {
   var listQuestion = new List<QuestionModel>();
-  bool OK = false;
   try {
     dynamic questions = await departuresDatabase
         .rawQuery("UPDATE ZQUESTION SET ZWRONG = ZWRONG + 1 WHERE Z_PK = $IdQuestion");
-    OK = true;
+
     /*for (var question in questions) {
       listQuestion.add(QuestionModel.fromJson(question));
     }*/
   } on Exception catch (_) {
     print(_);
-    OK = false;
     print('never reached');
   }
 

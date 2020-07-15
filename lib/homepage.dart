@@ -7,6 +7,7 @@ import 'package:test_license_driver/time.dart';
 import 'examsramdom.dart';
 import 'QuestionWrong.dart';
 import 'package:image_auto_slider/image_auto_slider.dart';
+import 'Quicklearn.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -318,7 +319,7 @@ class _MyHomePageState extends State<MyHomePage> {
           GestureDetector(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return SignPage();
+                return Quicklearn();
               }));
             },
             child: new Container(

@@ -7,6 +7,7 @@ import 'package:countdown_flutter/countdown_flutter.dart';
 import 'model/QuestionModel.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:test_license_driver/processdatabase.dart';
 import 'dart:math' as math;
 import 'CheckAnswers.dart';
 import 'Alert.dart';
@@ -341,7 +342,7 @@ showAlert(data) {
     },
   );
 }
-void _settingModalBottomSheet(data){
+void _settingModalBottomSheet(data) async{
 
   List<Widget> result = [];
   var number = 0;
@@ -357,12 +358,18 @@ void _settingModalBottomSheet(data){
       }
       else{
         isCorect = false;
+        await initializeDatabase().then((v) async {
+           await WriteQuestionWrong(v, ques.Z_PK);
+        });
       }
     }
     else{
       if(data[1][i].question.zQuestionDie != "" ){
         isDieQuestion ++;
       }
+      await initializeDatabase().then((v) async {
+        await WriteQuestionWrong(v, ques.Z_PK);
+      });
       isCorect = false;
     }
     result.add(

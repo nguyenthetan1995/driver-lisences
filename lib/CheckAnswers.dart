@@ -22,15 +22,31 @@ class _CheckAnswerState extends State<CheckAnswer> {
   int _indexSelect;
   @override
   Widget build(BuildContext context) {
+    var text = new RichText(
+      text: new TextSpan(
+        // Note: Styles for TextSpans must be explicitly defined.
+        // Child text spans will inherit styles from parent
+        style: new TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          new TextSpan(text: 'Câu ${widget.index + 1}: ' + widget.Answer.zQuestion??'',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ( widget.Answer.zQuestionDie != null && widget.Answer.IsFinish == true)
+              ? new TextSpan(text: ' (Câu điểm liệt)', style: new TextStyle(fontWeight: FontWeight.bold, color: Colors.blue,fontSize: 18))
+              : new TextSpan(text: '')
+        ],
+      ),
+    );
     return Container(
         margin: const EdgeInsets.only(top: 10.0),
         child: ListView(children: <Widget>[
           Container(
             margin: EdgeInsets.only(bottom: 20.0),
-            child: Text(
+            child: text /*Text(
               'Câu ${widget.index + 1}: ' + widget.Answer.zQuestion ?? '',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            ),*/
           ),
           (widget.Answer.zImageQuestion == '')
               ? Container()
@@ -263,6 +279,9 @@ class _CheckAnswerState extends State<CheckAnswer> {
 
   ClickanSwers(int answersindex){
     widget.Answer.UserChoses = answersindex;
+    /*if(answersindex != widget.Answer.zAnswer){
+      widget.Answer.QuestionWrong = widget.Answer.QuestionWrong +1;
+    }*/
     setState(() {
       _indexSelect = answersindex;
     });

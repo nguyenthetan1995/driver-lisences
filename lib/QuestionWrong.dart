@@ -96,6 +96,24 @@ class _ListExamPage1State extends State<QuestionWrong> {
       if (listQuestionExam.length != 0) {
         for(int index = 0; index <listQuestionExam.length; index ++){
           lstTabs.add(Tab(text: 'Câu ${index +1}'));
+          String questionwrong = '';
+          var text = new RichText(
+            text: new TextSpan(
+              // Note: Styles for TextSpans must be explicitly defined.
+              // Child text spans will inherit styles from parent
+              style: new TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+              ),
+              children: <TextSpan>[
+                new TextSpan(text: 'Câu ${index + 1}: ' + listQuestionExam[index].zQuestion??'',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                listQuestionExam[index].zQuestionDie != null
+                    ? new TextSpan(text: ' (Câu điểm liệt)', style: new TextStyle(fontWeight: FontWeight.bold, color: Colors.blue,fontSize: 18))
+                    : new TextSpan(text: '')
+              ],
+            ),
+          );
+
           bodyTabs.add(
             Container(
               padding: EdgeInsets.all(10.0),
@@ -103,10 +121,7 @@ class _ListExamPage1State extends State<QuestionWrong> {
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.only(bottom: 20.0),
-                      child: Text(
-                        'Câu ${index + 1}: ' + listQuestionExam[index].zQuestion ?? '',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
+                      child: text
                     ),
                     SizedBox(
                       height: 5,
@@ -122,11 +137,7 @@ class _ListExamPage1State extends State<QuestionWrong> {
                                   "assets/imageapp/${listQuestionExam[index].zImageQuestion}"),
                               fit: BoxFit.contain)),
                     ),
-                    new Divider(
-                      indent: 0.0,
-                      color: Colors.grey,
-                      height: 0,
-                    ),
+
                     (listQuestionExam[index].zAnswer == '1')
                         ? answerRight(listQuestionExam[index].zOption1,1)
                         : answerWrong(listQuestionExam[index].zOption1,1),
@@ -145,7 +156,7 @@ class _ListExamPage1State extends State<QuestionWrong> {
                     ),
                     (listQuestionExam[index].zOption3 == null || listQuestionExam[index].zOption3 == '')
                         ? Container()
-                        : (listQuestionExam[index].zAnswer == '1')
+                        : (listQuestionExam[index].zAnswer == '3')
                         ? answerRight(listQuestionExam[index].zOption3,3)
                         : answerWrong(listQuestionExam[index].zOption3,3),
                     new Divider(
@@ -158,6 +169,33 @@ class _ListExamPage1State extends State<QuestionWrong> {
                         : (listQuestionExam[index].zAnswer == '4')
                         ? answerRight(listQuestionExam[index].zOption4,4)
                         : answerWrong(listQuestionExam[index].zOption4,4),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0,right: 5.0, left: 5.0),
+                      child: (listQuestionExam[index].zAnswerDesc == '')
+                          ? Container()
+                          : Column(
+                        children: <Widget>[
+                          Text(
+                            'Giải thích đáp án',
+                            style:
+                            TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              listQuestionExam[index].zAnswerDesc,
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.lightBlue, width: 2),
+                                borderRadius: BorderRadius.all(Radius.circular(8))),
+                          )
+                        ],
+                      ),
+                    )
                   ]
               )
             )

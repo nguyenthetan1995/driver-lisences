@@ -6,6 +6,8 @@ QuestionModel questionFromJson(String str) {
 }
 
 class QuestionModel{
+  int Z_PK;
+
   String zQuestion;
   String zOption1;
   String zOption2;
@@ -22,8 +24,10 @@ class QuestionModel{
   String zQuestionDie;
   String zAnswerDesc;
   bool IsFinish;
+  int QuestionWrong;
   int UserChoses;
   QuestionModel({
+    this.Z_PK,
     this.zQuestion,
     this.zOption1,
     this.zOption2,
@@ -40,11 +44,13 @@ class QuestionModel{
     this.zAnswerDesc,
     this.IsFinish,
     this.zQuestionDie,
+    this.QuestionWrong,
     this.UserChoses,
 }
 );
   Map<String,dynamic> toJson(){
     var result=  Map<String,dynamic>() ;
+    result["Z_PK"] = this.Z_PK;
     result["ZQUESTIONCONTENT"]=this.zQuestion;
     result["ZOPTION1"]=this.zOption1;
     result["ZOPTION2"]=this.zOption2;
@@ -62,11 +68,13 @@ class QuestionModel{
     result["ZANSWERDESC"]=this.zAnswerDesc;
     result["ISFINISH"]=this.IsFinish;
     result["UserChoses"]=this.UserChoses;
+    result["ZWRONG"]=this.QuestionWrong;
     return result;
 
   }
   factory QuestionModel.fromJson(Map<String, dynamic> json){
     return QuestionModel(
+      Z_PK :json["Z_PK"],
       zQuestion: json["ZQUESTIONCONTENT"],
       zOption1: json["ZOPTION1"],
       zOption2: json["ZOPTION2"],
@@ -83,6 +91,7 @@ class QuestionModel{
       zQuestionDie: json["ZQUESTIONDIE"],
       zAnswerDesc: json["ZANSWERDESC"],
       IsFinish: json["ISFINISH"],
+      QuestionWrong:json["ZWRONG"],
       UserChoses: json["UserChoses"],
     );
   }
