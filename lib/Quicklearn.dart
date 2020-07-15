@@ -20,7 +20,7 @@ class Quicklearn extends StatefulWidget {
 class _ListExamPage1State extends State<Quicklearn> {
   List<Widget> exams = [];
   QicklearnModel question;
-  List<Widget> lstTabs = [];
+ /* List<LearnQickContent> Datalearn = List<LearnQickContent>();*/
   List<Widget> bodyTabs = new List();
   TabController _controller;
   List<QicklearnModel> listQuestionExam = [];
@@ -45,11 +45,8 @@ class _ListExamPage1State extends State<Quicklearn> {
       // TODO: Check List Test
       // TODO: Create List Test and save
       result= await GetQuicklearnData();
-      for(var i = 0; i < result.length; i++){
-        result[i].isExpanded = false;
-      }
+     /* Datalearn = dataLearn;*/
     }
-
     return result;
   }
   Future<List<QicklearnModel>>  GetQuicklearnData() async
@@ -79,29 +76,132 @@ class _ListExamPage1State extends State<Quicklearn> {
   @override
   Widget build(BuildContext context) {
     List<QicklearnModel> ListLearn   = testData;
+    List<bool> Pansion   = [];
     List<ExpansionPanel> ExpantionList = [];
+    ExpantionList.add(
+      ExpansionPanel(
+        headerBuilder: (BuildContext context, bool isExpanded) {
+          return ListTile(
+              title:  Text(
+                'Khái niệm và quy tắc',
+                textAlign: TextAlign.left,
+                style:  TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              )
+          );
+        },
+        isExpanded: false,
+        body: Container(
+          child: Text('ListLearn[i].ZCONTENT'),
+        )
+      )
+    );
+    ExpantionList.add(
+        ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                  title:  Text(
+                    'Nghiệp vụ vận tải',
+                    textAlign: TextAlign.left,
+                    style:  TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+              );
+            },
+            isExpanded: false,
+            body: Container(
+              child: Text('ListLearn[i].ZCONTENT'),
+            )
+        )
+    );
+    ExpantionList.add(
+        ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                  title:  Text(
+                    'Kỹ thuật lái xe',
+                    textAlign: TextAlign.left,
+                    style:  TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+              );
+            },
+            isExpanded: false,
+            body: Container(
+              child: Text('ListLearn[i].ZCONTENT'),
+            )
+        )
+    );
+    ExpantionList.add(
+        ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                  title:  Text(
+                    'Cấu tạo sửa chữa',
+                    textAlign: TextAlign.left,
+                    style:  TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+              );
+            },
+            isExpanded: false,
+            body: Container(
+              child: Text('ListLearn[i].ZCONTENT'),
+            )
+        )
+    );
+    ExpantionList.add(
+        ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                  title:  Text(
+                    'Biển báo',
+                    textAlign: TextAlign.left,
+                    style:  TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+              );
+            },
+            isExpanded: false,
+            body: Container(
+              child: Text('ListLearn[i].ZCONTENT'),
+            )
+        )
+    );
+    ExpantionList.add(
+        ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                  title:  Text(
+                    'Câu hỏi sa hình',
+                    textAlign: TextAlign.left,
+                    style:  TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+              );
+            },
+            isExpanded: false,
+            body: Container(
+              child: Text('ListLearn[i].ZCONTENT'),
+            )
+        )
+    );
+   /* for(var i = 0;i < dataLearn)*/
     if(ListLearn.length !=  0){
       for(var i = 0; i < ListLearn.length; i++){
-        ExpantionList.add(
-            ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return  ListTile(
-                      title:  Text(
-                        'hello',
-                        textAlign: TextAlign.left,
-                        style:  TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                  );
-                },
-                isExpanded: ListLearn[i].isExpanded,
-                body: Container(
-                  child: Text(ListLearn[i].ZCONTENT),
-                )
-            )
-        );
+
       }
 
     }
@@ -113,14 +213,17 @@ class _ListExamPage1State extends State<Quicklearn> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: ExpansionPanelList(
-              expansionCallback: (int index, bool isExpanded) {
-                setState(() {
-                  ListLearn[index].isExpanded = !ListLearn[index].isExpanded;
-                });
-              },
-              children: ExpantionList,
-            ),
+            child:Container(
+
+              child:  ExpansionPanelList(
+                expansionCallback: (int index, bool isExpanded) {
+                  setState(() {
+                    Pansion[index] = !Pansion[index];
+                  });
+                },
+                children: ExpantionList
+              ),
+            )
           )
         ],
       ),
