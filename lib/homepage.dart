@@ -8,7 +8,7 @@ import 'examsramdom.dart';
 import 'QuestionWrong.dart';
 import 'package:image_auto_slider/image_auto_slider.dart';
 import 'Quicklearn.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -128,8 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: new Container(
                 child:  Container(
                     padding: EdgeInsets.only(top:10.0, bottom: 5.0),
-                    height: 70,
-                    width: 150,
+                    height: 55,
+                    width: 70,
                     child:new Image.asset('assets/imghome/book.png',fit: BoxFit.contain,)
                 )
             ),
@@ -139,7 +139,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child:new Container(
                 padding: EdgeInsets.only(left: 5.0, right: 5.0),
                 child:Center(
-                    child: new Text('Học lý thuyết', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                    child: AutoSizeText(
+                      'Học lý thuyết',
+                      style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                    ),
                 )
             )
           )
@@ -177,8 +182,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: new Container(
                 child:  Container(
                     padding: EdgeInsets.only(top:10.0, bottom: 5.0),
-                    height: 70,
-                    width: 150,
+                    height: 55,
+                    width: 70,
                     child:new Image.asset('assets/imghome/book_2.png',fit: BoxFit.contain,)
                 )
             ),
@@ -188,7 +193,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child:new Container(
               padding: EdgeInsets.only(left: 5.0, right: 5.0),
               child:Center(
-                  child: new Text('Thi theo bộ đề', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                  child: AutoSizeText(
+                    'Thi theo bộ đề',
+                    style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                  ),
               )
             )
           )
@@ -225,9 +235,9 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: new Container(
                 child:  Container(
-                    padding: EdgeInsets.only(top:10.0, bottom: 5.0),
-                    height: 70,
-                    width: 150,
+                    padding: EdgeInsets.only(top:5.0, bottom: 5.0),
+                    height: 55,
+                    width: 70,
                     child:new Image.asset('assets/imghome/traffic_sign.png',fit: BoxFit.contain,)
                 )
             ),
@@ -237,7 +247,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child:new Container(
                 padding: EdgeInsets.only(left: 5.0, right: 5.0),
                 child:Center(
-                    child: new Text('Biển báo giao thông', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                    child:  AutoSizeText(
+                      'Biển báo giao thông',
+                      style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                    )
                 )
             )
           )
@@ -276,8 +291,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: new Container(
                 child:  Container(
                     padding: EdgeInsets.only(top:10.0, bottom: 5.0),
-                    height: 70,
-                    width: 150,
+                    height: 55,
+                    width: 70,
                     child:new Image.asset('assets/imghome/random.png',fit: BoxFit.contain,)
                 )
             ),
@@ -287,7 +302,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child:new Container(
                 padding: EdgeInsets.only(left: 5.0, right: 5.0),
                 child:Center(
-                    child: new Text('Đề thi ngẫu nhiên', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                    child: AutoSizeText(
+                      'Đề thi ngẫu nhiên',
+                      style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                    )
                 )
             )
           )
@@ -325,8 +345,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: new Container(
                 child:  Container(
                     padding: EdgeInsets.only(top:10.0, bottom: 5.0),
-                    height: 70,
-                    width: 150,
+                    height: 55,
+                    width: 70,
                     child:new Image.asset('assets/imghome/light.png',fit: BoxFit.contain,)
                 )
             ),
@@ -336,7 +356,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child:new Container(
                 padding: EdgeInsets.only(left: 5.0, right: 5.0),
                 child:Center(
-                    child: new Text('Mẹo thi kết quả cao', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                    child: AutoSizeText(
+                      'Mẹo thi kết quả cao',
+                      style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                    )
                 )
             )
           )
@@ -374,8 +399,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: new Container(
                 child:  Container(
                     padding: EdgeInsets.only(top:10.0, bottom: 5.0),
-                    height: 70,
-                    width: 150,
+                    height: 55,
+                    width: 70,
                     child:new Image.asset('assets/imghome/wrong.png',fit: BoxFit.contain,)
                 )
             ),
@@ -385,7 +410,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child:new Container(
                   padding: EdgeInsets.only(left: 5.0, right: 5.0),
                   child:Center(
-                      child: new Text('Câu hay sai', style:new TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
+                      child: AutoSizeText(
+                        'Câu hay sai',
+                        style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                      )
                   )
               )
           )
@@ -414,7 +444,6 @@ class _MyHomePageState extends State<MyHomePage> {
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               children: <Widget>[
-
                 new Container(
                     width:  MediaQuery.of(context).size.width,
                     height:120.0,
@@ -445,9 +474,8 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.only(top: 15.0,),
               key: slidekey,
               height:MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height/4)-56.0-34.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
+              child: Center(
+                child:
                   Expanded(
                     child: GridView.count(
                         crossAxisCount: 2,
@@ -459,11 +487,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
 
-                ],
               ),
             ),
           ),
-
         ],
       )
     );
