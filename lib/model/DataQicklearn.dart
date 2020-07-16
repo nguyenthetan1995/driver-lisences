@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:async' show Future;
+import 'package:flutter/services.dart' show rootBundle;
+
 class LearnQickContent{
   String Content;
   bool isExpan;
@@ -6,31 +10,12 @@ class LearnQickContent{
     this.Content,
     this.isExpan
   });
+  factory LearnQickContent.fromJSON(Map<String,dynamic> json){
+    return LearnQickContent(
+        Content : json["Content"],
+        isExpan: json["isExpan"]
+    );
+  }
 }
 
-List<dynamic> dataLearn = [
-  {
-    'Content':'Khái niệm và quy tắc',
-    'isExpan': false
-  },
-  {
-    'Content':'Nghiệp vụ vận tải',
-    'isExpan': false
-  },
-  {
-    'Content':'Kỹ thuật lái xe',
-    'isExpan': false
-  },
-  {
-    'Content':'Cấu tạo và sửa chữa',
-    'isExpan': false
-  },
-  {
-    'Content':'Biển báo',
-    'isExpan': false
-  },
-  {
-    'Content':'Câu hỏi sa hình',
-    'isExpan': false
-  }
-];
+

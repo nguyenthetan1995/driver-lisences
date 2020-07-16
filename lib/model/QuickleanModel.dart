@@ -24,7 +24,6 @@ class QicklearnModel{
     result["ZDESC"]=this.ZDESC;
     result["isExpanded"]=this.isExpanded;
     return result;
-
   }
   factory QicklearnModel.fromJson(Map<String, dynamic> json){
     return QicklearnModel(
