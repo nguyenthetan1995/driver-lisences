@@ -9,6 +9,12 @@ import 'QuestionWrong.dart';
 import 'package:image_auto_slider/image_auto_slider.dart';
 import 'Quicklearn.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'Help.dart';
+import 'Contact.dart';
+import 'ShareApp.dart';
+import 'package:rating_dialog/rating_dialog.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'permission.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -17,7 +23,43 @@ class MyHomePage extends StatefulWidget {
 
 GlobalKey slidekey = GlobalKey();
 class _MyHomePageState extends State<MyHomePage> {
+  void _showRatingDialog() {
+    // We use the built in showDialog function to show our Rating Dialog
+    showDialog(
+        context: context,
+        barrierDismissible: true, // set to false if you want to force a rating
+        builder: (context) {
+          return RatingDialog(
+            icon: const FlutterLogo(
+                size: 100,
+                colors: Colors.blue), // set your own image/icon widget
+            title: "Đánh giá ứng dụng",
+            description:
+            "Chọn số sao để đánh giá về ứng dụng của chúng tôi. Xin cảm ơn!",
+            submitButton: "Đồng ý",
+            alternativeButton: "Liên hệ với chúng tôi?", // optional
+            positiveComment: "Cảm ơn bạn đã đánh giá ứng dụng", // optional
+            negativeComment: "We're sad to hear :(", // optional
+            accentColor: Colors.red, // optional
+            onSubmitPressed: (int rating) {
+              print("onSubmitPressed: rating = $rating");
+              // TODO: open the app's page on Google Play / Apple App Store
+            },
+            onAlternativePressed: () {
+              print("onAlternativePressed: do something");
+              // TODO: maybe you want the user to contact you instead of rating a bad review
+            },
+          );
+        });
+  }
   List<Widget> options = [];
+  Future<void> share() async {
+    await FlutterShare.share(
+        title: 'Chọn ứng dụng chia sẻ',
+        text:'',
+        chooserTitle: 'Chọn ứng dụng chia sẻ'
+    );
+  }
   Drawer _drawerbuild(context){
     return new Drawer(
         child:new ListView(
@@ -44,18 +86,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: new Text('Trang chủ', style: TextStyle(color: Colors.white)),
                 onTap: (){
                   setState(() {
-
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      //return apppermission();
+                    }));
                   });
                 },
               ),
             ),
-
             new ListTile(
               leading: new Icon(Icons.help),
               title: new Text('Hướng dẫn sử dụng'),
               onTap: (){
                 setState(() {
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Hepl();
+                  }));
                 });
               },
             ),
@@ -64,7 +109,9 @@ class _MyHomePageState extends State<MyHomePage> {
               title: new Text('Hỗ trợ'),
               onTap: (){
                 setState(() {
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Contact();
+                  }));
                 });
               },
             ),
@@ -78,21 +125,28 @@ class _MyHomePageState extends State<MyHomePage> {
             new ListTile(
               leading: new Icon(Icons.thumb_up),
               title: new Text('Đánh giá'),
+              onTap: (){
+                _showRatingDialog();
+              },
             ),
             new ListTile(
               leading: new Icon(Icons.share),
               title: new Text('Chia sẻ'),
+              onTap: (){
+                setState(() {
+                  share();
+                });
+              },
             ),
-            new ListTile(
-              leading: new Icon(Icons.people),
-              title: new Text('Chính sách điều khoản'),
-            ),
+
           ],
         )
     );
   }
   Color colorOption = Colors.lightBlue;
   double sizeOption = 10;
+
+
   @override
   Widget build(BuildContext context) {
     options.clear();
@@ -451,11 +505,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ImageAutoSlider(
                       assetImages: [
                         AssetImage('assets/background/background-01.jpg'),
-                        AssetImage('assets/img2.jpg'),
-                        AssetImage('assets/img3.jpeg')
+                        AssetImage('assets/background/Background-02.png')
                       ],
                       imageHeight: 120.0,
-                      boxFit: BoxFit.fitWidth,
+                      boxFit: BoxFit.fill,
                       slideMilliseconds: 700,
                       durationSecond: 3,
                     ),
@@ -508,36 +561,3 @@ class OptionObject {
   double size;
 }
 
-Widget optionObject(OptionObject option) {
-  return Container(
-    padding: EdgeInsets.all(10),
-    decoration: BoxDecoration(
-        border: Border.all(color: Colors.lightBlue, width: 2),
-        borderRadius: BorderRadius.all(Radius.circular(8))),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          height: 50,
-//          color: Colors.orange,
-          child: Center(
-            child: new Icon(option.iconOption,color: option.color,size: option.size,),
-//            child: option.iconOption
-          ),
-        ),
-        Container(
-          height: 50,
-//          color: Colors.green,
-          child: Center(
-            child: Text(
-              option.textDescription,
-              style: TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
