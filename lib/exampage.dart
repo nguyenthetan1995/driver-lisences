@@ -108,6 +108,10 @@ class _ExamPageState extends State<ExamPage>
                   child: Text('Kết thúc') ,
                   onTap: (){
                     showAlert([context,listQuestionExam,lstQues,_streamController]);
+                    _streamController.add(<String>[
+                      "34",
+                      "babcbcb"
+                    ]);
                   },
                 )
                 :Container()
@@ -325,9 +329,13 @@ showAlert(data) {
                 "34",
                 "babcbcb"
               ]);
+              setState(){
+
+              }
               Navigator.of(context).pop();
+
               _settingModalBottomSheet([data[0],data[2]]);
-              setState(){}
+
             },
           ),
           FlatButton(

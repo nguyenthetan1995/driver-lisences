@@ -105,8 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             new ListTile(
-              leading: new Icon(Icons.phone),
-              title: new Text('Hỗ trợ'),
+              leading: new Icon(Icons.comment),
+              title: new Text('Phản hồi'),
               onTap: (){
                 setState(() {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
