@@ -30,12 +30,12 @@ class _FeedbackScreenState extends State<Contact> {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).padding.top,
+                        top: 0,
                         left: 16,
                         right: 16),
                     child: Image.asset('assets/imghome/feedbackImage.png'),
                   ),
-                  Container(
+                  /*Container(
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       'Phản hồi',
@@ -44,7 +44,7 @@ class _FeedbackScreenState extends State<Contact> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                  ),*/
                   Container(
                     padding: const EdgeInsets.all(13),
                     child: const Text(

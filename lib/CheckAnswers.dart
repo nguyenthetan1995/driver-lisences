@@ -252,12 +252,12 @@ class _CheckAnswerState extends State<CheckAnswer> {
               children: <Widget>[
                 widget.Answer?.zAnswer == widget.Answer?.UserChoses.toString()?
                 Container(
-                  padding: const EdgeInsets.only(left: 20.0, top: 10),
+                  padding: const EdgeInsets.only(left: 15.0, top: 10),
                   alignment:  Alignment.centerLeft,
                   child: Text('KẾT QUẢ: ĐÚNG ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
                 )
                 : Container(
-                  padding: const EdgeInsets.only(left: 20.0, top: 10),
+                  padding: const EdgeInsets.only(left: 15.0, top: 10),
                   alignment: Alignment.centerLeft,
                   child: Text('KẾT QUẢ: SAI ' , style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))
                 ),

@@ -106,12 +106,14 @@ class _ExamPageState extends State<ExamPage>
                 ? (listQuestionExam[_currentIndex].IsFinish != true )?
                 GestureDetector(
                   child: Text('Kết thúc') ,
-                  onTap: (){
-                    showAlert([context,listQuestionExam,lstQues,_streamController]);
+                  onTap: () async{
+                    await showAlert([context,listQuestionExam,lstQues,_streamController]);
+                    setState(() {});
                     _streamController.add(<String>[
                       "34",
                       "babcbcb"
                     ]);
+
                   },
                 )
                 :Container()
@@ -321,7 +323,7 @@ showAlert(data) {
         actions: <Widget>[
           FlatButton(
             child: Text("Đồng ý"),
-            onPressed: () {
+            onPressed: ()async {
               for(var i = 0; i <=data[1].length-1 ; i++){
                 data[1][i].IsFinish = true;
               }
@@ -329,12 +331,9 @@ showAlert(data) {
                 "34",
                 "babcbcb"
               ]);
-              setState(){
-
-              }
-              Navigator.of(context).pop();
-
               _settingModalBottomSheet([data[0],data[2]]);
+              Navigator.of(data[0]).pop();
+
 
             },
           ),
@@ -353,8 +352,10 @@ showAlert(data) {
 void _settingModalBottomSheet(data) async{
 
   List<Widget> result = [];
+  var IsdieQuestion = false;
   var number = 0;
   var ispass = false;
+  String Result = '';
   var isDieQuestion = 0;
   for(var i = 0; i < data[1].length ; i++){
     QuestionModel ques = data[1][i].question;
@@ -366,13 +367,17 @@ void _settingModalBottomSheet(data) async{
       }
       else{
         isCorect = false;
+        if(ques.zQuestionDie != null  || ques.zQuestionDie != '' ){
+          IsdieQuestion = true;
+          isDieQuestion ++;
+        }
         await initializeDatabase().then((v) async {
            await WriteQuestionWrong(v, ques.Z_PK);
         });
       }
     }
     else{
-      if(data[1][i].question.zQuestionDie != "" ){
+      if(ques.zQuestionDie != "" ){
         isDieQuestion ++;
       }
       await initializeDatabase().then((v) async {
@@ -421,8 +426,17 @@ void _settingModalBottomSheet(data) async{
     );
   }
   if(number  > 31){
-
-    ispass = true;
+    if(IsdieQuestion == false){
+      Result = 'BẠN ĐÃ ĐẬU!';
+      ispass = true;
+    }
+    else{
+      ispass = false;
+      Result = 'BẠN ĐÃ TRƯỢT! (Sai câu liệt)';
+    }
+  }
+  else{
+    Result = 'BẠN ĐÃ TRƯỢT!';
   }
   showModalBottomSheet(
       context: data[0],
@@ -434,7 +448,7 @@ void _settingModalBottomSheet(data) async{
             children: <Widget>[
               Container(
                 height: 80.0,
-                padding: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.only(top: 0),
                 margin: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -449,18 +463,18 @@ void _settingModalBottomSheet(data) async{
                       color: Colors.black12
                   ),
                 ),
-                child: Column(
-                  children: <Widget>[
-                    Center(
-                      child: Container(
-                        child:  ispass == true ?
-                        Text('BẠN ĐÃ ĐẬU!',style: TextStyle(color: Colors.blue, fontSize: 20.0,fontWeight: FontWeight.bold),)
-                        : Text('BẠN ĐÃ TRƯỢT!',style: TextStyle(color: Colors.blue, fontSize: 20.0,fontWeight: FontWeight.bold)),
-                      )
-                    ) ,
-                    Text(number.toString()+'/35',style: TextStyle(color: Colors.blue, fontSize: 20.0,fontWeight: FontWeight.bold)
-                    ),
-                  ],
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                          child: Text(Result,style: TextStyle(color: Colors.blue, fontSize: 20.0,fontWeight: FontWeight.bold),)
+                      ),
+                      Text(number.toString()+'/35',style: TextStyle(color: Colors.blue, fontSize: 20.0,fontWeight: FontWeight.bold)
+                      ),
+                    ],
+                  )
                 )
               ),
               Expanded(
